@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Claude Built Snake</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --ink: #1a1209;
+  --paper: #f5f0e8;
+  --accent: #c4390a;
+  --gold: #d4a017;
+  --muted: #7a6e60;
+  --light: #ede8de;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Mono', monospace;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Grain texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.6;
+}
+
+header {
+  padding: 3rem 4rem 2rem;
+  border-bottom: 1px solid rgba(26,18,9,0.15);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.title-block h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3.2rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.title-block h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.title-block p {
+  margin-top: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.meta {
+  text-align: right;
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  line-height: 2;
+}
+
+.meta strong { color: var(--ink); font-weight: 500; }
+
+/* Main layout */
+main {
+  padding: 2rem 4rem 4rem;
+  display: grid;
+  gap: 2rem;
+}
+
+/* ── SECTION LABELS ── */
+.section-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(26,18,9,0.12);
+}
+
+/* ── TIMELINE ── */
+.timeline-section {
+  background: var(--light);
+  border: 1px solid rgba(26,18,9,0.1);
+  padding: 2rem;
+}
+
+.timeline {
+  display: flex;
+  gap: 0;
+  position: relative;
+  margin-top: 0.5rem;
+}
+
+.phase {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.phase-bar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s;
+}
+
+.phase:hover .phase-bar::before { transform: translateX(0); }
+
+.phase:nth-child(1) .phase-bar { background: #2d2416; color: #f5f0e8; flex: 1.2; }
+.phase:nth-child(2) .phase-bar { background: #5c3d1e; color: #f5f0e8; }
+.phase:nth-child(3) .phase-bar { background: #8b5e2e; color: #f5f0e8; }
+.phase:nth-child(4) .phase-bar { background: #c4390a; color: #f5f0e8; }
+.phase:nth-child(5) .phase-bar { background: #d4a017; color: #1a1209; }
+
+.phase-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.phase-duration {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: center;
+  margin-top: 0.2rem;
+}
+
+.phase-detail {
+  display: none;
+  position: absolute;
+  top: calc(100% + 1rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1rem 1.25rem;
+  font-size: 0.68rem;
+  line-height: 1.7;
+  width: 220px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.phase-detail::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid var(--ink);
+}
+
+.phase:hover .phase-detail { display: block; }
+
+/* ── TWO COLUMN ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* ── CODE BREAKDOWN ── */
+.code-breakdown {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2rem;
+}
+
+.code-breakdown .section-label { color: rgba(245,240,232,0.4); }
+.code-breakdown .section-label::after { background: rgba(245,240,232,0.1); }
+
+.donut-wrap {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+
+canvas#donut {
+  flex-shrink: 0;
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.legend-item:hover { opacity: 0.7; }
+
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-pct {
+  margin-left: auto;
+  color: rgba(245,240,232,0.5);
+  font-size: 0.62rem;
+}
+
+/* ── DECISIONS ── */
+.decisions {
+  background: var(--light);
+  border: 1px solid rgba(26,18,9,0.1);
+  padding: 2rem;
+}
+
+.decision-list {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.decision-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(26,18,9,0.08);
+  font-size: 0.68rem;
+}
+
+.decision-item:last-child { border-bottom: none; }
+
+.decision-num {
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  width: 20px;
+  text-align: right;
+}
+
+.decision-text { line-height: 1.5; }
+.decision-text strong { font-weight: 500; display: block; margin-bottom: 0.1rem; }
+.decision-text span { color: var(--muted); font-size: 0.62rem; }
+
+.decision-tag {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.tag-design { background: rgba(196,57,10,0.12); color: var(--accent); }
+.tag-perf { background: rgba(212,160,23,0.15); color: #a07810; }
+.tag-ux { background: rgba(26,18,9,0.08); color: var(--ink); }
+
+/* ── COMPLEXITY BARS ── */
+.complexity {
+  background: var(--light);
+  border: 1px solid rgba(26,18,9,0.1);
+  padding: 2rem;
+  grid-column: 1 / -1;
+}
+
+.bar-grid {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 0.75rem;
+}
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 36px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bar-name {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-align: right;
+}
+
+.bar-track {
+  height: 18px;
+  background: rgba(26,18,9,0.07);
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+  position: relative;
+}
+
+.bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: rgba(255,255,255,0.4);
+}
+
+.bar-val {
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.bar-b1 .bar-fill { background: #2d2416; }
+.bar-b2 .bar-fill { background: #5c3d1e; }
+.bar-b3 .bar-fill { background: #8b5e2e; }
+.bar-b4 .bar-fill { background: #c4390a; }
+.bar-b5 .bar-fill { background: #d4a017; }
+.bar-b6 .bar-fill { background: #3d6b4f; }
+.bar-b7 .bar-fill { background: #4a5568; }
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border: 1px solid rgba(26,18,9,0.12);
+}
+
+.stat {
+  padding: 1.5rem;
+  border-right: 1px solid rgba(26,18,9,0.12);
+  text-align: center;
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.4rem;
+}
+
+/* Animate on load */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+.timeline-section, .two-col > *, .complexity, .stats-strip {
+  animation: fadeUp 0.6s ease both;
+}
+.timeline-section { animation-delay: 0.1s; }
+.stats-strip { animation-delay: 0.2s; }
+.code-breakdown { animation-delay: 0.3s; }
+.decisions { animation-delay: 0.35s; }
+.complexity { animation-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <h1>How I Built<br><em>Snake</em></h1>
+    <p>A process visualization · Claude Sonnet 4.6</p>
+  </div>
+  <div class="meta">
+    <div>Output <strong>snake_game.html</strong></div>
+    <div>Lines of code <strong>178</strong></div>
+    <div>Technologies <strong>HTML · CSS · Canvas API</strong></div>
+    <div>Approach <strong>Single-file · Vanilla JS</strong></div>
+  </div>
+</header>
+
+<main>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <div class="section-label">01 &nbsp; Build Phases</div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-bar" style="flex:1.3">READ</div>
+        <div class="phase-label">Skill file<br>consultation</div>
+        <div class="phase-duration">~1s</div>
+        <div class="phase-detail">Read SKILL.md to learn best practices for design aesthetics, font choices, and visual principles before writing a single line.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-bar">DESIGN</div>
+        <div class="phase-label">Aesthetic<br>direction</div>
+        <div class="phase-duration">~1s</div>
+        <div class="phase-detail">Chose retro-arcade aesthetic: scanlines, neon glow, dark background. Selected "Share Tech Mono" + "Bebas Neue" as the font pair.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-bar">STRUCTURE</div>
+        <div class="phase-label">Game state<br>& data model</div>
+        <div class="phase-duration">~2s</div>
+        <div class="phase-detail">Defined snake as array of {x,y} coords. State machine: idle → running → paused → dead. Grid: 21×21 cells on a 420px canvas.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-bar">LOGIC</div>
+        <div class="phase-label">Game loop<br>& mechanics</div>
+        <div class="phase-duration">~3s</div>
+        <div class="phase-detail">setInterval game loop. Collision detection for walls + self. Food placement avoiding snake body. Speed scaling per level.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-bar">RENDER</div>
+        <div class="phase-label">Canvas API<br>& effects</div>
+        <div class="phase-duration">~2s</div>
+        <div class="phase-detail">Canvas 2D rendering with shadowBlur glow effects. Pulsing food via Math.sin(Date.now()). Gradient snake opacity by segment index.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat">
+      <div class="stat-num">178</div>
+      <div class="stat-label">Lines of Code</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Core Functions</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Game States</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">21</div>
+      <div class="stat-label">Grid Size (cells)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Font Families</div>
+    </div>
+  </div>
+
+  <!-- TWO COL -->
+  <div class="two-col">
+
+    <!-- DONUT CHART -->
+    <div class="code-breakdown">
+      <div class="section-label">02 &nbsp; Code Composition</div>
+      <div class="donut-wrap">
+        <canvas id="donut" width="140" height="140"></canvas>
+        <div class="donut-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#e8ff47"></div>CSS Styling<span class="legend-pct">38%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#c4390a"></div>Game Logic<span class="legend-pct">28%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#d4a017"></div>Canvas Render<span class="legend-pct">18%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3d6b4f"></div>Input Handling<span class="legend-pct">10%</span></div>
+          <div class="legend-item"><div class="legend-dot" style="background:#4a5568"></div>HTML Structure<span class="legend-pct">6%</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECISIONS -->
+    <div class="decisions">
+      <div class="section-label">03 &nbsp; Key Design Decisions</div>
+      <div class="decision-list">
+        <div class="decision-item">
+          <div class="decision-num">01</div>
+          <div class="decision-text"><strong>Single HTML file</strong><span>No build step, instant portability</span></div>
+          <div class="decision-tag tag-ux">UX</div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">02</div>
+          <div class="decision-text"><strong>Canvas 2D over DOM</strong><span>Smooth animation, pixel control</span></div>
+          <div class="decision-tag tag-perf">PERF</div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">03</div>
+          <div class="decision-text"><strong>scanline CSS overlay</strong><span>Retro CRT texture via repeating-linear-gradient</span></div>
+          <div class="decision-tag tag-design">DESIGN</div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">04</div>
+          <div class="decision-text"><strong>shadowBlur glow</strong><span>Neon effect without SVG filters</span></div>
+          <div class="decision-tag tag-design">DESIGN</div>
+        </div>
+        <div class="decision-item">
+          <div class="decision-num">05</div>
+          <div class="decision-text"><strong>Speed scaling by level</strong><span>max(60, 150 − (level−1)×12) ms</span></div>
+          <div class="decision-tag tag-ux">UX</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- COMPLEXITY BARS -->
+  <div class="complexity">
+    <div class="section-label">04 &nbsp; Implementation Complexity by Component</div>
+    <div class="bar-grid">
+      <div class="bar-row bar-b1">
+        <div class="bar-name">Visual Effects</div>
+        <div class="bar-track"><div class="bar-fill" data-w="92"></div></div>
+        <div class="bar-val">92</div>
+      </div>
+      <div class="bar-row bar-b2">
+        <div class="bar-name">State Machine</div>
+        <div class="bar-track"><div class="bar-fill" data-w="80"></div></div>
+        <div class="bar-val">80</div>
+      </div>
+      <div class="bar-row bar-b3">
+        <div class="bar-name">Collision Detection</div>
+        <div class="bar-track"><div class="bar-fill" data-w="68"></div></div>
+        <div class="bar-val">68</div>
+      </div>
+      <div class="bar-row bar-b4">
+        <div class="bar-name">Input Handling</div>
+        <div class="bar-track"><div class="bar-fill" data-w="55"></div></div>
+        <div class="bar-val">55</div>
+      </div>
+      <div class="bar-row bar-b5">
+        <div class="bar-name">Score / Leveling</div>
+        <div class="bar-track"><div class="bar-fill" data-w="44"></div></div>
+        <div class="bar-val">44</div>
+      </div>
+      <div class="bar-row bar-b6">
+        <div class="bar-name">Food Placement</div>
+        <div class="bar-track"><div class="bar-fill" data-w="32"></div></div>
+        <div class="bar-val">32</div>
+      </div>
+      <div class="bar-row bar-b7">
+        <div class="bar-name">HTML Structure</div>
+        <div class="bar-track"><div class="bar-fill" data-w="18"></div></div>
+        <div class="bar-val">18</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// Animate bars after load
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.bar-fill').forEach(el => {
+      el.style.width = el.dataset.w + '%';
+    });
+  }, 400);
+
+  // Donut chart
+  const canvas = document.getElementById('donut');
+  const ctx = canvas.getContext('2d');
+  const cx = 70, cy = 70, r = 52, inner = 30;
+  const slices = [
+    { pct: 0.38, color: '#e8ff47' },
+    { pct: 0.28, color: '#c4390a' },
+    { pct: 0.18, color: '#d4a017' },
+    { pct: 0.10, color: '#3d6b4f' },
+    { pct: 0.06, color: '#4a5568' },
+  ];
+
+  let start = -Math.PI / 2;
+  let drawn = 0;
+  const total = slices.length;
+  const gap = 0.04;
+
+  function drawDonut(progress) {
+    ctx.clearRect(0, 0, 140, 140);
+    let s = -Math.PI / 2;
+    slices.forEach((sl, i) => {
+      const end = s + sl.pct * Math.PI * 2 * Math.min(progress, 1) - gap;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, s, end);
+      ctx.closePath();
+      ctx.fillStyle = sl.color;
+      ctx.fill();
+      s = end + gap + gap;
+    });
+    // Punch hole
+    ctx.beginPath();
+    ctx.arc(cx, cy, inner, 0, Math.PI * 2);
+    ctx.fillStyle = '#1a1209';
+    ctx.fill();
+    // Center text
+    ctx.fillStyle = 'rgba(245,240,232,0.5)';
+    ctx.font = '500 9px DM Mono, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('178 LOC', cx, cy);
+  }
+
+  let progress = 0;
+  function animate() {
+    progress += 0.04;
+    drawDonut(progress);
+    if (progress < 1) requestAnimationFrame(animate);
+  }
+  setTimeout(animate, 300);
+});
+</script>
+</body>
+</html>

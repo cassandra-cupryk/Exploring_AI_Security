@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNAKE</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Bebas+Neue&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #e8ff47;
+    font-family: 'Share Tech Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(232,255,71,0.02) 2px, rgba(232,255,71,0.02) 4px);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    letter-spacing: 0.3em;
+    color: #e8ff47;
+    text-shadow: 0 0 40px rgba(232,255,71,0.5), 0 0 80px rgba(232,255,71,0.2);
+    margin-bottom: 0.2em;
+    animation: flicker 4s infinite;
+  }
+
+  @keyframes flicker {
+    0%,96%,100% { opacity: 1; }
+    97% { opacity: 0.7; }
+    98% { opacity: 1; }
+    99% { opacity: 0.5; }
+  }
+
+  .hud {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: rgba(232,255,71,0.6);
+  }
+
+  .hud span { color: #e8ff47; font-size: 1.1rem; }
+
+  canvas {
+    border: 1px solid rgba(232,255,71,0.3);
+    box-shadow: 0 0 60px rgba(232,255,71,0.1), inset 0 0 40px rgba(0,0,0,0.5);
+    background: #050505;
+    display: block;
+  }
+
+  .msg {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+    color: #e8ff47;
+    text-shadow: 0 0 30px rgba(232,255,71,0.8);
+    text-align: center;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.97); }
+  }
+
+  .controls {
+    margin-top: 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(232,255,71,0.35);
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+<h1>SNAKE</h1>
+<div class="hud">
+  <div>SCORE &nbsp;<span id="score">0</span></div>
+  <div>BEST &nbsp;<span id="best">0</span></div>
+  <div>LEVEL &nbsp;<span id="level">1</span></div>
+</div>
+<div class="wrapper">
+  <canvas id="c" width="420" height="420"></canvas>
+  <div class="msg" id="msg">PRESS SPACE<br><span style="font-size:1rem;letter-spacing:.1em">TO START</span></div>
+</div>
+<div class="controls">WASD / ARROW KEYS to move &nbsp;·&nbsp; SPACE to pause</div>
+
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const GRID = 20, COLS = 21, ROWS = 21;
+const W = canvas.width, H = canvas.height;
+const CW = W / COLS, CH = H / ROWS;
+
+let snake, dir, nextDir, food, score, best = 0, level, speed, state, loop;
+
+function init() {
+  snake = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
+  dir = {x:1,y:0};
+  nextDir = {x:1,y:0};
+  score = 0;
+  level = 1;
+  speed = 150;
+  placeFood();
+  updateHUD();
+}
+
+function placeFood() {
+  let pos;
+  do {
+    pos = {x: Math.floor(Math.random()*COLS), y: Math.floor(Math.random()*ROWS)};
+  } while (snake.some(s=>s.x===pos.x&&s.y===pos.y));
+  food = pos;
+}
+
+function step() {
+  dir = nextDir;
+  const head = {x: snake[0].x+dir.x, y: snake[0].y+dir.y};
+
+  if (head.x<0||head.x>=COLS||head.y<0||head.y>=ROWS||snake.some(s=>s.x===head.x&&s.y===head.y)) {
+    state = 'dead';
+    clearInterval(loop);
+    if (score > best) best = score;
+    document.getElementById('best').textContent = best;
+    document.getElementById('msg').innerHTML = 'GAME OVER<br><span style="font-size:1rem;letter-spacing:.1em">SPACE TO RETRY</span>';
+    document.getElementById('msg').style.display='block';
+    return;
+  }
+
+  snake.unshift(head);
+  if (head.x===food.x&&head.y===food.y) {
+    score++;
+    level = Math.floor(score/5)+1;
+    speed = Math.max(60, 150 - (level-1)*12);
+    clearInterval(loop);
+    loop = setInterval(step, speed);
+    placeFood();
+    updateHUD();
+  } else {
+    snake.pop();
+  }
+  draw();
+}
+
+function updateHUD() {
+  document.getElementById('score').textContent = score;
+  document.getElementById('level').textContent = level;
+}
+
+function draw() {
+  ctx.fillStyle = '#050505';
+  ctx.fillRect(0,0,W,H);
+
+  // Grid dots
+  ctx.fillStyle = 'rgba(232,255,71,0.04)';
+  for(let x=0;x<COLS;x++) for(let y=0;y<ROWS;y++) {
+    ctx.fillRect(x*CW+CW/2-1, y*CH+CH/2-1, 2, 2);
+  }
+
+  // Food - pulsing circle
+  const t = Date.now()/400;
+  const glow = 0.5+0.5*Math.sin(t);
+  ctx.save();
+  ctx.shadowColor = '#ff4757';
+  ctx.shadowBlur = 15+glow*15;
+  ctx.fillStyle = `rgba(255,71,87,${0.7+glow*0.3})`;
+  ctx.beginPath();
+  ctx.arc(food.x*CW+CW/2, food.y*CH+CH/2, CW/2-2, 0, Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+
+  // Snake
+  snake.forEach((seg, i) => {
+    const ratio = i/snake.length;
+    const alpha = 1-ratio*0.6;
+    ctx.save();
+    ctx.shadowColor = '#e8ff47';
+    ctx.shadowBlur = i===0 ? 20 : 8*(1-ratio);
+    ctx.fillStyle = i===0 ? `rgba(232,255,71,${alpha})` : `rgba(180,220,30,${alpha*0.85})`;
+    const pad = i===0?1:2;
+    const r = 3;
+    const x=seg.x*CW+pad, y=seg.y*CH+pad, w=CW-pad*2, h=CH-pad*2;
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  });
+}
+
+document.addEventListener('keydown', e => {
+  const map = {
+    ArrowUp:{x:0,y:-1}, w:{x:0,y:-1},
+    ArrowDown:{x:0,y:1}, s:{x:0,y:1},
+    ArrowLeft:{x:-1,y:0}, a:{x:-1,y:0},
+    ArrowRight:{x:1,y:0}, d:{x:1,y:0},
+  };
+  const key = e.key.toLowerCase()==='arrowup'?'ArrowUp':e.key.toLowerCase()==='arrowdown'?'ArrowDown':e.key.toLowerCase()==='arrowleft'?'ArrowLeft':e.key.toLowerCase()==='arrowright'?'ArrowRight':e.key.toLowerCase();
+
+  if (map[key]) {
+    e.preventDefault();
+    const d = map[key];
+    if (d.x !== -dir.x || d.y !== -dir.y) nextDir = d;
+  }
+
+  if (e.key === ' ') {
+    e.preventDefault();
+    if (state==='idle'||state==='dead') {
+      init();
+      state='running';
+      document.getElementById('msg').style.display='none';
+      loop = setInterval(step, speed);
+    } else if (state==='running') {
+      state='paused';
+      clearInterval(loop);
+      document.getElementById('msg').innerHTML='PAUSED';
+      document.getElementById('msg').style.display='block';
+    } else if (state==='paused') {
+      state='running';
+      document.getElementById('msg').style.display='none';
+      loop = setInterval(step, speed);
+    }
+  }
+});
+
+// Initial draw
+state = 'idle';
+init();
+draw();
+
+// Animate food glow when idle
+function idleAnim() {
+  if (state==='idle'||state==='dead') draw();
+  requestAnimationFrame(idleAnim);
+}
+idleAnim();
+</script>
+</body>
+</html>
