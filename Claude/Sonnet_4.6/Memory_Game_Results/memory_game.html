@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Match — Accessible Card Game</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/open-dyslexic@1.0.3/open-dyslexic-regular.css">
+
+<!-- Skip link for keyboard users -->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+  /* OpenDyslexic loaded via CDN below in <link> */
+
+/* ── DESIGN TOKENS ── */
+:root {
+  --bg: #f7f4ef;
+  --surface: #ffffff;
+  --ink: #1c1917;
+  --muted: #78716c;
+  --accent: #b45309;
+  --accent-light: #fef3c7;
+  --match: #166534;
+  --match-light: #dcfce7;
+  --card-back: #292524;
+  --card-front: #ffffff;
+  --border: rgba(28,25,23,0.12);
+  --focus: #2563eb;
+  --radius: 8px;
+  --transition: 0.45s cubic-bezier(0.4,0,0.2,1);
+  --font-base: 'Atkinson Hyperlegible', sans-serif;
+}
+
+body.dyslexic-font {
+  --font-base: 'OpenDyslexic', sans-serif;
+}
+
+/* ── HIGH CONTRAST MODE ── */
+@media (forced-colors: active) {
+  :root {
+    --bg: Canvas;
+    --surface: Canvas;
+    --ink: CanvasText;
+    --muted: GrayText;
+    --accent: Highlight;
+    --card-back: ButtonFace;
+    --card-front: Canvas;
+    --border: CanvasText;
+    --focus: Highlight;
+  }
+  .card-inner { border: 2px solid CanvasText !important; }
+  .card.matched .card-front { border: 3px solid Highlight !important; }
+}
+
+/* Manual high contrast toggle */
+body.high-contrast {
+  --bg: #000000;
+  --surface: #000000;
+  --ink: #ffffff;
+  --muted: #cccccc;
+  --accent: #ffff00;
+  --accent-light: #333300;
+  --match: #00ff00;
+  --match-light: #003300;
+  --card-back: #ffffff;
+  --card-front: #000000;
+  --border: #ffffff;
+  --focus: #ffff00;
+}
+
+body.high-contrast .card-back { background: #ffffff; color: #000000; }
+body.high-contrast .card-front { background: #000000; color: #ffffff; border: 2px solid #ffffff; }
+body.high-contrast .card.matched .card-front { border: 3px solid #00ff00; background: #003300; }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .card-inner { transform: none !important; }
+  .card.flipped .card-inner,
+  .card.matched .card-inner { transform: none !important; }
+  .card:not(.flipped):not(.matched) .card-front { display: none; }
+  .card.flipped .card-back,
+  .card.matched .card-back { display: none; }
+}
+
+body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}
+body.reduced-motion .card:not(.flipped):not(.matched) .card-front { display: none; }
+body.reduced-motion .card.flipped .card-back,
+body.reduced-motion .card.matched .card-back { display: none; }
+
+/* ── SKIP LINK ── */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--focus);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.85rem;
+  z-index: 999;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ── BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-base);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 2rem 3rem 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.title h1 {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 2.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.title p {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+/* ── CONTROLS TOOLBAR ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.toolbar-btn {
+  font-family: var(--font-base);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.toolbar-btn:hover { background: var(--ink); color: var(--bg); }
+.toolbar-btn:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.toolbar-btn.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+/* ── STATS ── */
+.stats {
+  padding: 1rem 3rem;
+  display: flex;
+  gap: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.stat { text-align: center; }
+.stat-num {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* ── LIVE REGION (screen reader announcements) ── */
+#announcer {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── GAME AREA ── */
+#game-area {
+  flex: 1;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ── INSTRUCTIONS ── */
+.instructions {
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+  line-height: 1.8;
+  max-width: 520px;
+}
+
+.instructions kbd {
+  display: inline-block;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0.05rem 0.4rem;
+  font-family: var(--font-base);
+  font-size: 0.7rem;
+  color: var(--ink);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+/* ── CARD GRID ── */
+#card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ── CARDS ── */
+.card {
+  aspect-ratio: 3/4;
+  perspective: 800px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+  border-radius: var(--radius);
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform var(--transition);
+  border-radius: var(--radius);
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-back, .card-front {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.card-back {
+  background: var(--card-back);
+  color: rgba(255,255,255,0.15);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.05em;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card-back::after {
+  content: '?';
+  color: rgba(255,255,255,0.25);
+  font-size: 1.8rem;
+}
+
+.card-front {
+  background: var(--card-front);
+  border: 1px solid var(--border);
+  transform: rotateY(180deg);
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 2.2rem;
+}
+
+.card-front .card-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: var(--font-base);
+}
+
+.card.matched .card-front {
+  background: var(--match-light);
+  border-color: var(--match);
+}
+
+.card.matched .card-front .card-label {
+  color: var(--match);
+}
+
+/* ── WIN BANNER ── */
+#win-banner {
+  display: none;
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  max-width: 400px;
+  width: 100%;
+  border-radius: var(--radius);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(10px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+#win-banner h2 {
+  font-family: var(--font-base);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#win-banner p {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 1.25rem;
+}
+
+#win-banner button {
+  font-family: var(--font-base);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.5rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius);
+  transition: opacity 0.2s;
+}
+
+#win-banner button:hover { opacity: 0.8; }
+#win-banner button:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+
+<!-- Skip navigation for keyboard users -->
+<a href="#game-area" class="skip-link">Skip to game</a>
+
+<!-- Screen reader live region -->
+<div id="announcer" aria-live="polite" aria-atomic="true" role="status"></div>
+
+<header>
+  <div class="title">
+    <h1>Memory Match</h1>
+    <p>An accessible card game</p>
+  </div>
+
+  <nav class="toolbar" aria-label="Accessibility and game controls">
+    <button class="toolbar-btn" id="btn-hc" aria-pressed="false" onclick="toggleHighContrast()">
+      High Contrast
+    </button>
+    <button class="toolbar-btn" id="btn-rm" aria-pressed="false" onclick="toggleReducedMotion()">
+      Reduce Motion
+    </button>
+    <button class="toolbar-btn" id="btn-df" aria-pressed="false" onclick="toggleDyslexicFont()">
+      Dyslexic Font
+    </button>
+    <button class="toolbar-btn" onclick="newGame()" aria-label="Start a new game">
+      New Game
+    </button>
+  </nav>
+</header>
+
+<div class="stats" role="region" aria-label="Game statistics">
+  <div class="stat">
+    <div class="stat-num" id="stat-moves" aria-live="polite">0</div>
+    <div class="stat-label">Moves</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" id="stat-matches" aria-live="polite">0</div>
+    <div class="stat-label">Matches</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num" id="stat-remaining" aria-live="polite">8</div>
+    <div class="stat-label">Remaining</div>
+  </div>
+</div>
+
+<main id="game-area">
+  <p class="instructions" role="note">
+    Find matching pairs of cards. Use <kbd>Tab</kbd> to move between cards,
+    <kbd>Enter</kbd> or <kbd>Space</kbd> to flip. Toggle <strong>High Contrast</strong>,
+    <strong>Reduce Motion</strong>, or <strong>Dyslexic Font</strong> (OpenDyslexic) in the toolbar above.
+  </p>
+
+  <div
+    id="card-grid"
+    role="grid"
+    aria-label="Memory card grid, 4 columns"
+  ></div>
+
+  <div id="win-banner" role="alertdialog" aria-modal="true" aria-labelledby="win-title" aria-describedby="win-desc" tabindex="-1">
+    <h2 id="win-title">🎉 You won!</h2>
+    <p id="win-desc">All pairs matched. <span id="win-moves"></span></p>
+    <button onclick="newGame()" id="play-again-btn">Play Again</button>
+  </div>
+</main>
+
+<script>
+const CARDS = [
+  { emoji: '🌿', label: 'Plant' },
+  { emoji: '🔮', label: 'Crystal' },
+  { emoji: '🦋', label: 'Butterfly' },
+  { emoji: '🌙', label: 'Moon' },
+  { emoji: '🐚', label: 'Shell' },
+  { emoji: '🍄', label: 'Mushroom' },
+  { emoji: '⭐', label: 'Star' },
+  { emoji: '🌊', label: 'Wave' },
+];
+
+let state = {
+  cards: [],
+  flipped: [],
+  matched: [],
+  moves: 0,
+  locked: false,
+};
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function announce(msg) {
+  const el = document.getElementById('announcer');
+  el.textContent = '';
+  setTimeout(() => { el.textContent = msg; }, 50);
+}
+
+function updateStats() {
+  document.getElementById('stat-moves').textContent = state.moves;
+  document.getElementById('stat-matches').textContent = state.matched.length / 2;
+  document.getElementById('stat-remaining').textContent = (CARDS.length - state.matched.length / 2);
+}
+
+function newGame() {
+  // Close win banner
+  const banner = document.getElementById('win-banner');
+  banner.style.display = 'none';
+  banner.removeAttribute('tabindex');
+
+  state = { cards: [], flipped: [], matched: [], moves: 0, locked: false };
+
+  const pairs = shuffle([...CARDS, ...CARDS].map((c, i) => ({ ...c, id: i })));
+  state.cards = pairs;
+
+  renderGrid();
+  updateStats();
+  announce('New game started. 16 cards to match. Use Tab and Enter or Space to flip cards.');
+
+  // Focus first card
+  setTimeout(() => {
+    const firstCard = document.querySelector('.card');
+    if (firstCard) firstCard.focus();
+  }, 100);
+}
+
+function renderGrid() {
+  const grid = document.getElementById('card-grid');
+  grid.innerHTML = '';
+
+  state.cards.forEach((card, index) => {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.setAttribute('role', 'gridcell');
+    el.setAttribute('tabindex', '0');
+    el.setAttribute('aria-label', `Card ${index + 1} of 16, face down`);
+    el.setAttribute('data-index', index);
+
+    el.innerHTML = `
+      <div class="card-inner" aria-hidden="true">
+        <div class="card-back"></div>
+        <div class="card-front">
+          <span>${card.emoji}</span>
+          <span class="card-label">${card.label}</span>
+        </div>
+      </div>
+    `;
+
+    el.addEventListener('click', () => flipCard(index));
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        flipCard(index);
+      }
+    });
+
+    grid.appendChild(el);
+  });
+}
+
+function getCardEl(index) {
+  return document.querySelector(`.card[data-index="${index}"]`);
+}
+
+function flipCard(index) {
+  if (state.locked) return;
+  if (state.flipped.includes(index)) return;
+  if (state.matched.includes(index)) return;
+
+  const card = state.cards[index];
+  const el = getCardEl(index);
+
+  el.classList.add('flipped');
+  el.setAttribute('aria-label', `Card ${index + 1}, ${card.label} ${card.emoji}, face up`);
+
+  state.flipped.push(index);
+  announce(`Flipped ${card.label}.`);
+
+  if (state.flipped.length === 2) {
+    state.moves++;
+    updateStats();
+    checkMatch();
+  }
+}
+
+function checkMatch() {
+  const [a, b] = state.flipped;
+  const cardA = state.cards[a];
+  const cardB = state.cards[b];
+
+  if (cardA.emoji === cardB.emoji) {
+    // Match!
+    state.matched.push(a, b);
+    getCardEl(a).classList.add('matched');
+    getCardEl(b).classList.add('matched');
+    getCardEl(a).setAttribute('aria-label', `Card ${a+1}, ${cardA.label} — matched!`);
+    getCardEl(b).setAttribute('aria-label', `Card ${b+1}, ${cardB.label} — matched!`);
+
+    state.flipped = [];
+    updateStats();
+
+    const remaining = CARDS.length - state.matched.length / 2;
+    announce(`Match! ${cardA.label} pair found. ${remaining} pair${remaining !== 1 ? 's' : ''} remaining.`);
+
+    if (state.matched.length === state.cards.length) {
+      setTimeout(showWin, 600);
+    }
+  } else {
+    // No match — flip back
+    state.locked = true;
+    announce(`No match. ${cardA.label} and ${cardB.label} don't pair.`);
+
+    setTimeout(() => {
+      getCardEl(a).classList.remove('flipped');
+      getCardEl(b).classList.remove('flipped');
+      getCardEl(a).setAttribute('aria-label', `Card ${a+1} of 16, face down`);
+      getCardEl(b).setAttribute('aria-label', `Card ${b+1} of 16, face down`);
+      state.flipped = [];
+      state.locked = false;
+    }, 1200);
+  }
+}
+
+function showWin() {
+  const banner = document.getElementById('win-banner');
+  document.getElementById('win-moves').textContent = `Completed in ${state.moves} move${state.moves !== 1 ? 's' : ''}.`;
+  banner.style.display = 'block';
+  announce(`Congratulations! You matched all pairs in ${state.moves} moves!`);
+  setTimeout(() => {
+    document.getElementById('play-again-btn').focus();
+  }, 100);
+}
+
+// ── ACCESSIBILITY TOGGLES ──
+
+function toggleDyslexicFont() {
+  const btn = document.getElementById('btn-df');
+  const active = document.body.classList.toggle('dyslexic-font');
+  btn.setAttribute('aria-pressed', active);
+  btn.classList.toggle('active', active);
+  announce(active ? 'OpenDyslexic font enabled.' : 'OpenDyslexic font disabled. Using Atkinson Hyperlegible.');
+}
+
+function toggleHighContrast() {
+  const btn = document.getElementById('btn-hc');
+  const active = document.body.classList.toggle('high-contrast');
+  btn.setAttribute('aria-pressed', active);
+  btn.classList.toggle('active', active);
+  announce(active ? 'High contrast mode enabled.' : 'High contrast mode disabled.');
+}
+
+function toggleReducedMotion() {
+  const btn = document.getElementById('btn-rm');
+  const active = document.body.classList.toggle('reduced-motion');
+  btn.setAttribute('aria-pressed', active);
+  btn.classList.toggle('active', active);
+  announce(active ? 'Reduced motion enabled. Cards will not animate.' : 'Reduced motion disabled. Animations restored.');
+}
+
+// ── START ──
+newGame();
+</script>
+</body>
+</html>
