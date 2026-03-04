@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Decision Map — Memory Game</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #0d0d14;
+  --node-core: #7c3aed;
+  --node-glow: rgba(124,58,237,0.4);
+  --c1: #06b6d4;   /* accessibility */
+  --c2: #f59e0b;   /* game design */
+  --c3: #10b981;   /* tech */
+  --c4: #f43f5e;   /* visual */
+  --c5: #8b5cf6;   /* iteration */
+  --line: rgba(255,255,255,0.08);
+  --text: #e2e8f0;
+  --muted: rgba(226,232,240,0.45);
+}
+
+body {
+  background: var(--bg);
+  font-family: 'Syne', sans-serif;
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+}
+
+body:active { cursor: grabbing; }
+
+/* Stars background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 55%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 75%, rgba(255,255,255,0.15) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Canvas for lines */
+#canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Map container */
+#map {
+  position: fixed;
+  inset: 0;
+  transform-origin: center center;
+}
+
+/* Nodes */
+.node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: filter 0.2s;
+}
+
+.node:hover { filter: brightness(1.3); }
+
+.node-bubble {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.node:hover .node-bubble { transform: scale(1.12); }
+
+.node-bubble::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.node:hover .node-bubble::before { opacity: 1; }
+
+/* Core node */
+.node-core .node-bubble {
+  width: 110px; height: 110px;
+  background: radial-gradient(circle at 35% 35%, #9f67ff, #5b21b6);
+  box-shadow: 0 0 40px var(--node-glow), 0 0 80px rgba(124,58,237,0.2);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  padding: 12px;
+  line-height: 1.3;
+}
+
+.node-core .node-bubble::before {
+  background: radial-gradient(circle, rgba(124,58,237,0.3), transparent 70%);
+  inset: -20px;
+}
+
+/* Branch nodes */
+.node-branch .node-bubble {
+  width: 78px; height: 78px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: white;
+  padding: 8px;
+  line-height: 1.3;
+}
+
+/* Leaf nodes */
+.node-leaf .node-bubble {
+  width: 58px; height: 58px;
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.9);
+  padding: 6px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+/* Detail nodes */
+.node-detail .node-bubble {
+  width: 44px; height: 44px;
+  font-size: 0.44rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  padding: 4px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Pulse animation on core */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(124,58,237,0.5);
+  animation: pulse-ring 2.5s ease-out infinite;
+  pointer-events: none;
+}
+.pulse-ring:nth-child(2) { animation-delay: 0.8s; }
+.pulse-ring:nth-child(3) { animation-delay: 1.6s; }
+
+/* Tooltip */
+#tooltip {
+  position: fixed;
+  background: rgba(13,13,20,0.95);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  font-family: 'Syne Mono', monospace;
+  font-size: 0.68rem;
+  line-height: 1.7;
+  max-width: 240px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+#tooltip.visible { opacity: 1; }
+#tooltip .tip-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.72rem;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.06em;
+}
+
+/* Legend */
+#legend {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 50;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Controls hint */
+#hint {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+  line-height: 2;
+  z-index: 50;
+}
+
+/* Title */
+#title {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 50;
+}
+
+#title h1 {
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: white;
+}
+
+#title p {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+/* Node appear animation */
+@keyframes nodeAppear {
+  from { opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+  to { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+}
+
+.node { animation: nodeAppear 0.5s cubic-bezier(0.34,1.56,0.64,1) both; }
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+<div id="map"></div>
+
+<div id="title">
+  <h1>Decision Neural Map</h1>
+  <p>Memory Match — Accessible Game</p>
+</div>
+
+<div id="tooltip">
+  <div class="tip-title" id="tip-title"></div>
+  <div id="tip-body"></div>
+</div>
+
+<div id="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c1)"></div>Accessibility</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c2)"></div>Game Design</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c3)"></div>Technology</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c4)"></div>Visual Design</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c5)"></div>Iteration</div>
+</div>
+
+<div id="hint">
+  Drag to pan · Scroll to zoom<br>
+  Hover nodes for details
+</div>
+
+<script>
+// ── NODE DATA ──
+// x,y are relative to center (0,0), in pixels on a 1400x900 virtual canvas
+
+const NODES = [
+  // CORE
+  {
+    id: 'core', label: 'Build\nMemory\nGame', type: 'core', x: 0, y: 0,
+    color: '#7c3aed',
+    tip: 'Central decision: Build an accessible memory card matching game. Chosen over Snake because turn-based play is naturally compatible with keyboard navigation and screen readers.'
+  },
+
+  // BRANCH 1 — ACCESSIBILITY
+  {
+    id: 'a11y', label: 'Accessi-\nbility', type: 'branch', x: -320, y: -180,
+    color: '#06b6d4',
+    tip: 'The primary constraint. All four features — keyboard nav, screen reader, reduced motion, high contrast — had to be first-class, not afterthoughts.'
+  },
+  {
+    id: 'keyboard', label: 'Keyboard\nNav', type: 'leaf', x: -490, y: -300,
+    color: '#06b6d4',
+    tip: 'Every card gets tabindex="0". Enter and Space flip cards. A skip link lets users jump past the header. Focus is managed programmatically after game events.'
+  },
+  {
+    id: 'sr', label: 'Screen\nReader', type: 'leaf', x: -530, y: -160,
+    color: '#06b6d4',
+    tip: 'aria-live announcer region speaks every game event. Card aria-labels update dynamically. Stats use aria-live="polite". Win banner uses role="alertdialog".'
+  },
+  {
+    id: 'motion', label: 'Reduced\nMotion', type: 'leaf', x: -480, y: -30,
+    color: '#06b6d4',
+    tip: 'Respects prefers-reduced-motion OS setting automatically. Manual toggle also available. Disables CSS flip animation; cards reveal instantly instead.'
+  },
+  {
+    id: 'hc', label: 'High\nContrast', type: 'leaf', x: -370, y: 100,
+    color: '#06b6d4',
+    tip: 'Manual toggle + automatic forced-colors media query for Windows High Contrast Mode. Pure black/white/yellow palette. Matched borders become bright green.'
+  },
+  {
+    id: 'aria-live', label: 'aria-live\nregion', type: 'detail', x: -650, y: -290,
+    color: '#06b6d4',
+    tip: 'Hidden div with aria-live="polite". Text is cleared then reset with 50ms delay to force re-announcement even for repeated messages.'
+  },
+  {
+    id: 'skip', label: 'Skip\nLink', type: 'detail', x: -670, y: -160,
+    color: '#06b6d4',
+    tip: 'Positioned off-screen at top:-100px. Becomes visible on :focus. Jumps keyboard users directly to #game-area.'
+  },
+
+  // BRANCH 2 — GAME DESIGN
+  {
+    id: 'gamedesign', label: 'Game\nDesign', type: 'branch', x: 320, y: -200,
+    color: '#f59e0b',
+    tip: 'Core gameplay decisions: what kind of game, how it feels to play, what state it tracks.'
+  },
+  {
+    id: 'turnbased', label: 'Turn-\nBased', type: 'leaf', x: 490, y: -320,
+    color: '#f59e0b',
+    tip: 'Chose turn-based over real-time (like Snake). Turn-based play has no timing pressure, works naturally with keyboard and screen reader, and is easier to pause.'
+  },
+  {
+    id: 'pairs', label: '8 Pairs\n16 Cards', type: 'leaf', x: 540, y: -190,
+    color: '#f59e0b',
+    tip: '16 cards in a 4×4 grid. Enough challenge without overwhelming working memory. Each emoji has a text label too, so the game isn\'t purely visual.'
+  },
+  {
+    id: 'statemachine', label: 'State\nMachine', type: 'leaf', x: 500, y: -60,
+    color: '#f59e0b',
+    tip: 'Game state: cards[], flipped[], matched[], moves, locked flag. The locked flag prevents double-flipping while the mismatch timeout is running.'
+  },
+  {
+    id: 'emojis', label: 'Emoji +\nLabel', type: 'detail', x: 680, y: -310,
+    color: '#f59e0b',
+    tip: 'Each card shows both an emoji and a text label (e.g. 🌿 + "Plant"). This ensures the game is playable without emoji rendering and is meaningful to screen readers.'
+  },
+
+  // BRANCH 3 — TECHNOLOGY
+  {
+    id: 'tech', label: 'Tech\nStack', type: 'branch', x: 280, y: 220,
+    color: '#10b981',
+    tip: 'Deliberately minimal: single HTML file, vanilla JS, no frameworks. Reduces dependency risk and load time, and keeps the code auditable.'
+  },
+  {
+    id: 'vanilla', label: 'Vanilla\nJS', type: 'leaf', x: 450, y: 330,
+    color: '#10b981',
+    tip: 'No React, no build step. DOM manipulation is direct and transparent. Easier for accessibility auditing since there\'s no virtual DOM layer.'
+  },
+  {
+    id: 'cssflip', label: 'CSS 3D\nFlip', type: 'leaf', x: 320, y: 380,
+    color: '#10b981',
+    tip: 'Card flip uses CSS transform-style: preserve-3d and rotateY(180deg). Purely CSS — no JS animation library needed. Toggled off by reduced-motion.'
+  },
+  {
+    id: 'nolibrary', label: 'No\nLibrary', type: 'detail', x: 590, y: 390,
+    color: '#10b981',
+    tip: 'Deliberate choice to avoid dependencies. One self-contained HTML file works offline, is easy to inspect, and has no supply-chain risk.'
+  },
+
+  // BRANCH 4 — VISUAL DESIGN
+  {
+    id: 'visual', label: 'Visual\nDesign', type: 'branch', x: -280, y: 230,
+    color: '#f43f5e',
+    tip: 'Aesthetic direction: soft editorial, warm paper tones. A deliberate contrast to the dark neon Snake game — calm and legible over stimulating.'
+  },
+  {
+    id: 'fonts', label: 'Font\nChoice', type: 'leaf', x: -430, y: 340,
+    color: '#f43f5e',
+    tip: 'Default: Atkinson Hyperlegible (designed by Braille Institute for low vision). Toggle: OpenDyslexic (weighted letterforms for dyslexic readers). Both prioritize legibility over style.'
+  },
+  {
+    id: 'palette', label: 'Warm\nPalette', type: 'leaf', x: -290, y: 390,
+    color: '#f43f5e',
+    tip: '#f7f4ef warm paper background. Amber accent (#b45309). Green for matches (#166534). Dark card backs for clear face-down/face-up distinction.'
+  },
+  {
+    id: 'cssvars', label: 'CSS\nVariables', type: 'detail', x: -570, y: 390,
+    color: '#f43f5e',
+    tip: 'All colors defined as CSS custom properties. High contrast mode simply overrides the variables — no duplicate style rules needed.'
+  },
+
+  // BRANCH 5 — ITERATION
+  {
+    id: 'iteration', label: 'Iteration', type: 'branch', x: 0, y: 300,
+    color: '#8b5cf6',
+    tip: 'The game went through one explicit revision after a user pointed out the font choices contradicted the accessibility goals.'
+  },
+  {
+    id: 'fontfix', label: 'Font\nRevision', type: 'leaf', x: 130, y: 420,
+    color: '#8b5cf6',
+    tip: 'Original used Playfair Display (decorative serif) + Inconsolata (monospace). Both flagged as poor accessibility choices. Replaced entirely with Atkinson Hyperlegible + OpenDyslexic toggle.'
+  },
+  {
+    id: 'selfcritique', label: 'Self-\nCritique', type: 'leaf', x: -120, y: 430,
+    color: '#8b5cf6',
+    tip: 'Acknowledged that Playfair Display\'s high stroke contrast is problematic for low vision users. Inconsolata was designed for code, not accessibility. Honest about the contradiction.'
+  },
+];
+
+const EDGES = [
+  ['core','a11y'], ['core','gamedesign'], ['core','tech'], ['core','visual'], ['core','iteration'],
+  ['a11y','keyboard'], ['a11y','sr'], ['a11y','motion'], ['a11y','hc'],
+  ['keyboard','aria-live'], ['sr','skip'],
+  ['gamedesign','turnbased'], ['gamedesign','pairs'], ['gamedesign','statemachine'],
+  ['pairs','emojis'],
+  ['tech','vanilla'], ['tech','cssflip'],
+  ['vanilla','nolibrary'],
+  ['visual','fonts'], ['visual','palette'],
+  ['fonts','cssvars'],
+  ['iteration','fontfix'], ['iteration','selfcritique'],
+];
+
+// ── LAYOUT ──
+const CX = window.innerWidth / 2;
+const CY = window.innerHeight / 2;
+
+let panX = 0, panY = 0, zoom = 1;
+let isDragging = false, lastX = 0, lastY = 0;
+
+const map = document.getElementById('map');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Build node lookup
+const nodeMap = {};
+NODES.forEach(n => nodeMap[n.id] = n);
+
+// Render nodes
+NODES.forEach((n, i) => {
+  const el = document.createElement('div');
+  el.className = `node node-${n.type}`;
+  el.id = `node-${n.id}`;
+  el.style.left = (CX + n.x) + 'px';
+  el.style.top = (CY + n.y) + 'px';
+  el.style.animationDelay = (i * 0.04) + 's';
+
+  const sizes = { core: 110, branch: 78, leaf: 58, detail: 44 };
+  const size = sizes[n.type];
+
+  const glowColor = n.color + '55';
+
+  let inner = '';
+  if (n.type === 'core') {
+    inner = `
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+    `;
+  }
+
+  el.innerHTML = `
+    <div class="node-bubble" style="
+      width:${size}px; height:${size}px;
+      background: radial-gradient(circle at 35% 35%, ${lighten(n.color)}, ${n.color});
+      box-shadow: 0 0 ${size/2}px ${glowColor}, 0 0 ${size}px ${n.color}22;
+    ">
+      ${inner}
+      ${n.label.split('\n').map(l => `<span>${l}</span>`).join('')}
+    </div>
+  `;
+
+  el.addEventListener('mouseenter', (e) => showTooltip(e, n));
+  el.addEventListener('mouseleave', hideTooltip);
+  el.addEventListener('mousemove', moveTooltip);
+
+  map.appendChild(el);
+});
+
+function lighten(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `rgb(${Math.min(255,r+60)},${Math.min(255,g+60)},${Math.min(255,b+60)})`;
+}
+
+// Draw edges
+function drawEdges() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  EDGES.forEach(([fromId, toId]) => {
+    const a = nodeMap[fromId];
+    const b = nodeMap[toId];
+    if (!a || !b) return;
+
+    const ax = CX + a.x + panX * (1/zoom);
+    const ay = CY + a.y + panY * (1/zoom);
+    const bx = CX + b.x + panX * (1/zoom);
+    const by = CY + b.y + panY * (1/zoom);
+
+    // Adjust for zoom/pan via canvas transform
+    const x1 = ax * zoom + panX * (1 - zoom) + (CX * (1-zoom)) * 0;
+    const y1 = ay * zoom + panY * (1 - zoom) + (CY * (1-zoom)) * 0;
+
+    const grad = ctx.createLinearGradient(
+      CX + a.x, CY + a.y,
+      CX + b.x, CY + b.y
+    );
+    grad.addColorStop(0, a.color + '88');
+    grad.addColorStop(1, b.color + '44');
+
+    ctx.beginPath();
+    ctx.moveTo(CX + a.x, CY + a.y);
+
+    // Slight curve
+    const mx = (CX + a.x + CX + b.x) / 2;
+    const my = (CY + a.y + CY + b.y) / 2;
+    const dx = -(b.y - a.y) * 0.15;
+    const dy = (b.x - a.x) * 0.15;
+
+    ctx.quadraticCurveTo(mx + dx, my + dy, CX + b.x, CY + b.y);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = b.type === 'detail' ? 1 : b.type === 'leaf' ? 1.5 : 2;
+    ctx.setLineDash(b.type === 'detail' ? [3,4] : []);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+}
+
+drawEdges();
+
+// ── PAN & ZOOM ──
+function applyTransform() {
+  map.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+  map.style.transformOrigin = `${CX}px ${CY}px`;
+  drawEdgesTransformed();
+}
+
+function drawEdgesTransformed() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(panX, panY);
+  ctx.scale(zoom, zoom);
+  ctx.translate(-CX * (1 - 1), -CY * (1 - 1));
+
+  EDGES.forEach(([fromId, toId]) => {
+    const a = nodeMap[fromId];
+    const b = nodeMap[toId];
+    if (!a || !b) return;
+
+    const grad = ctx.createLinearGradient(CX+a.x, CY+a.y, CX+b.x, CY+b.y);
+    grad.addColorStop(0, a.color + '99');
+    grad.addColorStop(1, b.color + '55');
+
+    ctx.beginPath();
+    ctx.moveTo(CX + a.x, CY + a.y);
+    const mx = (CX+a.x + CX+b.x)/2;
+    const my = (CY+a.y + CY+b.y)/2;
+    const dx = -(b.y-a.y)*0.15;
+    const dy = (b.x-a.x)*0.15;
+    ctx.quadraticCurveTo(mx+dx, my+dy, CX+b.x, CY+b.y);
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = (b.type==='detail'?1:b.type==='leaf'?1.5:2.5) / zoom;
+    ctx.setLineDash(b.type==='detail'?[3/zoom,4/zoom]:[]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  ctx.restore();
+}
+
+drawEdgesTransformed();
+
+// Mouse pan
+document.addEventListener('mousedown', e => {
+  if (e.target.closest('.node')) return;
+  isDragging = true;
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+
+document.addEventListener('mousemove', e => {
+  if (!isDragging) return;
+  panX += e.clientX - lastX;
+  panY += e.clientY - lastY;
+  lastX = e.clientX;
+  lastY = e.clientY;
+  applyTransform();
+});
+
+document.addEventListener('mouseup', () => { isDragging = false; });
+
+// Scroll zoom
+document.addEventListener('wheel', e => {
+  e.preventDefault();
+  const delta = e.deltaY > 0 ? 0.9 : 1.1;
+  zoom = Math.min(2.5, Math.max(0.3, zoom * delta));
+  applyTransform();
+}, { passive: false });
+
+// Touch pan
+let lastTouch = null;
+document.addEventListener('touchstart', e => {
+  if (e.touches.length === 1) lastTouch = e.touches[0];
+});
+document.addEventListener('touchmove', e => {
+  if (e.touches.length === 1 && lastTouch) {
+    panX += e.touches[0].clientX - lastTouch.clientX;
+    panY += e.touches[0].clientY - lastTouch.clientY;
+    lastTouch = e.touches[0];
+    applyTransform();
+  }
+});
+
+// Resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  drawEdgesTransformed();
+});
+
+// ── TOOLTIP ──
+const tooltip = document.getElementById('tooltip');
+
+function showTooltip(e, node) {
+  document.getElementById('tip-title').textContent = node.label.replace('\n', ' ');
+  document.getElementById('tip-body').textContent = node.tip;
+  tooltip.classList.add('visible');
+  moveTooltip(e);
+}
+
+function hideTooltip() { tooltip.classList.remove('visible'); }
+
+function moveTooltip(e) {
+  let x = e.clientX + 16;
+  let y = e.clientY + 16;
+  if (x + 250 > window.innerWidth) x = e.clientX - 260;
+  if (y + 120 > window.innerHeight) y = e.clientY - 130;
+  tooltip.style.left = x + 'px';
+  tooltip.style.top = y + 'px';
+}
+</script>
+</body>
+</html>

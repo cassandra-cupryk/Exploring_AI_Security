@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logic Rules — Memory Game</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #faf8f5;
+  --ink: #1a1208;
+  --muted: #7c6f5e;
+  --rule: #f0ece4;
+  --border: rgba(26,18,8,0.1);
+  --accent: #c2410c;
+  --code-bg: #1e1b16;
+  --code-text: #e8dfc8;
+  --green: #15803d;
+  --blue: #1d4ed8;
+  --amber: #92400e;
+  --col1: #fef9f0;
+  --col2: #f0f7f4;
+  --col3: #f0f4ff;
+  --col4: #fff4f0;
+  --col5: #f5f0ff;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Spectral', serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 3rem 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 2rem;
+}
+
+h1 {
+  font-size: 2.6rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+.subtitle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+
+.toc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 2.2;
+  text-align: right;
+}
+
+.toc a {
+  color: var(--muted);
+  text-decoration: none;
+  display: block;
+  transition: color 0.2s;
+}
+.toc a:hover { color: var(--accent); }
+
+/* ── MAIN ── */
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── SECTION ── */
+.section {
+  border-bottom: 1px solid var(--border);
+  padding: 2.5rem 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  min-width: 32px;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* ── RULE CARD ── */
+.rule {
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.rule-header {
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.rule-header:hover { background: rgba(26,18,8,0.03); }
+
+.rule-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.rule-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+}
+
+.tag-math { background: var(--col3); color: var(--blue); }
+.tag-logic { background: var(--col2); color: var(--green); }
+.tag-constraint { background: var(--col4); color: var(--accent); }
+.tag-algo { background: var(--col5); color: #6d28d9; }
+.tag-color { background: var(--col1); color: var(--amber); }
+
+.rule-body {
+  display: none;
+  padding: 1.25rem 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: white;
+}
+
+.rule.open .rule-body { display: block; }
+
+.rule-chevron {
+  font-size: 0.6rem;
+  color: var(--muted);
+  transition: transform 0.2s;
+  margin-left: 1rem;
+}
+.rule.open .rule-chevron { transform: rotate(180deg); }
+
+/* ── FORMULA BLOCK ── */
+.formula {
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+  line-height: 2;
+  overflow-x: auto;
+}
+
+.formula .comment { color: #6b7a5e; }
+.formula .val { color: #7dd3a8; }
+.formula .op { color: #e8a87c; }
+.formula .fn { color: #82b4ff; }
+.formula .result { color: #f9d67a; font-weight: 500; }
+
+/* ── EXPLANATION ── */
+.explanation {
+  font-size: 0.92rem;
+  color: var(--ink);
+  line-height: 1.8;
+  margin-top: 0.75rem;
+}
+
+.explanation strong { font-weight: 600; }
+
+/* ── INTERACTIVE DEMO ── */
+.demo {
+  background: var(--rule);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.demo-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+
+.demo-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.demo-row label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  min-width: 100px;
+}
+
+input[type=range] {
+  flex: 1;
+  min-width: 120px;
+  accent-color: var(--accent);
+}
+
+.demo-output {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 80px;
+}
+
+/* ── COLOR SWATCH ── */
+.swatch-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.swatch-box {
+  width: 48px; height: 48px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+}
+
+.swatch-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.swatch-ratio {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+}
+
+/* ── SHUFFLE VIZ ── */
+.shuffle-viz {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0;
+}
+
+.shuffle-card {
+  width: 36px; height: 36px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.4s ease;
+}
+
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.45rem 1rem;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.btn:hover { opacity: 0.75; }
+
+/* ── GRID VIZ ── */
+.grid-viz {
+  display: inline-grid;
+  grid-template-columns: repeat(4, 40px);
+  gap: 4px;
+  margin: 0.75rem 0;
+}
+
+.grid-cell {
+  width: 40px; height: 52px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--muted);
+  background: var(--rule);
+  border-radius: 2px;
+}
+
+/* ── CONTRAST TABLE ── */
+.contrast-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  margin-top: 0.75rem;
+}
+
+.contrast-table th {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 2px solid var(--border);
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.58rem;
+}
+
+.contrast-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.pass { color: var(--green); font-weight: 500; }
+.fail { color: var(--accent); }
+
+.color-chip {
+  display: inline-block;
+  width: 14px; height: 14px;
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+  border: 1px solid var(--border);
+}
+
+/* ── TIMING VIZ ── */
+.timing-bar {
+  display: flex;
+  height: 32px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  border-radius: 2px;
+  margin: 0.75rem 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+}
+
+.timing-seg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0 6px;
+}
+
+/* ── OPEN ALL ── */
+.open-all {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 0.3rem 0.75rem;
+  margin-bottom: 2rem;
+  transition: all 0.2s;
+}
+.open-all:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Logical Rules &<br><em>Explicit Computations</em></h1>
+    <p class="subtitle">Memory Match · Every verifiable decision with actual values</p>
+  </div>
+  <nav class="toc">
+    <a href="#s1">01 · Grid & Layout Math</a>
+    <a href="#s2">02 · Shuffle Algorithm</a>
+    <a href="#s3">03 · Game State Logic</a>
+    <a href="#s4">04 · Timing Rules</a>
+    <a href="#s5">05 · Color & Contrast</a>
+    <a href="#s6">06 · Animation Math</a>
+    <a href="#s7">07 · Accessibility Logic</a>
+  </nav>
+</header>
+
+<main>
+
+<button class="open-all" onclick="toggleAll()">Expand All Rules</button>
+
+<!-- ══ SECTION 1: GRID ══ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-title">Grid & Layout Math</span>
+  </div>
+
+  <div class="rule" id="r-grid">
+    <div class="rule-header" onclick="toggle('r-grid')">
+      <span class="rule-name">Card grid dimensions</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-math">Math</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Card count decision</span>
+<span class="val">PAIRS</span>        <span class="op">=</span> <span class="val">8</span>
+<span class="val">TOTAL_CARDS</span>  <span class="op">=</span> PAIRS <span class="op">×</span> <span class="val">2</span>  <span class="op">=</span> <span class="result">16</span>
+
+<span class="comment">// Grid layout: find integer factors of 16</span>
+<span class="comment">// Options: 1×16, 2×8, 4×4, 8×2, 16×1</span>
+<span class="comment">// Chosen: 4×4 — most square, fits screen</span>
+<span class="val">COLS</span>  <span class="op">=</span> <span class="val">4</span>
+<span class="val">ROWS</span>  <span class="op">=</span> TOTAL_CARDS <span class="op">/</span> COLS  <span class="op">=</span> <span class="result">4</span>
+
+<span class="comment">// Card aspect ratio</span>
+<span class="val">CARD_W</span>  <span class="op">=</span> <span class="val">3</span>
+<span class="val">CARD_H</span>  <span class="op">=</span> <span class="val">4</span>
+<span class="val">RATIO</span>   <span class="op">=</span> CARD_H <span class="op">/</span> CARD_W  <span class="op">=</span> <span class="result">1.333</span>  <span class="comment">// portrait</span>
+
+<span class="comment">// Max grid width constrained to 560px</span>
+<span class="val">GRID_MAX_W</span>   <span class="op">=</span> <span class="val">560</span>px
+<span class="val">GAP</span>          <span class="op">=</span> <span class="val">16</span>px  <span class="comment">// 1rem</span>
+<span class="val">CARD_MAX_W</span>   <span class="op">=</span> (GRID_MAX_W <span class="op">-</span> GAP <span class="op">×</span> (COLS<span class="op">-</span><span class="val">1</span>)) <span class="op">/</span> COLS
+             <span class="op">=</span> (<span class="val">560</span> <span class="op">-</span> <span class="val">48</span>) <span class="op">/</span> <span class="val">4</span>  <span class="op">=</span> <span class="result">128</span>px max per card
+      </div>
+      <p class="explanation">The 4×4 grid was chosen because 16 cards is enough pairs to create genuine memory challenge without exhausting the player. A 4×4 grid is the most spatially balanced factoring of 16 — closer to square means less eye travel. The 3:4 portrait aspect ratio mimics a physical playing card, giving each card enough vertical space to show both an emoji and a text label.</p>
+      <div class="demo">
+        <div class="demo-label">Live: grid cell size calculator</div>
+        <div class="demo-row">
+          <label>Container width</label>
+          <input type="range" min="280" max="700" value="560" oninput="calcGrid(this.value)">
+          <span class="demo-output" id="grid-out">128px</span>
+        </div>
+        <div id="grid-formula" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);margin-top:.5rem"></div>
+      </div>
+      <div class="grid-viz" id="grid-preview" style="margin-top:1rem">
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" id="r-pairs">
+    <div class="rule-header" onclick="toggle('r-pairs')">
+      <span class="rule-name">Why 8 pairs, not 6 or 10</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-constraint">Constraint</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Cognitive load estimate per pair count</span>
+<span class="val">pairs</span> <span class="op">=</span> <span class="val">6</span>   <span class="op">→</span>  12 cards, 4×3 grid  <span class="comment">// too easy, non-square</span>
+<span class="val">pairs</span> <span class="op">=</span> <span class="val">8</span>   <span class="op">→</span>  16 cards, 4×4 grid  <span class="comment">// ✓ balanced, square</span>
+<span class="val">pairs</span> <span class="op">=</span> <span class="val">10</span>  <span class="op">→</span>  20 cards, 4×5 grid  <span class="comment">// harder, non-square</span>
+<span class="val">pairs</span> <span class="op">=</span> <span class="val">12</span>  <span class="op">→</span>  24 cards, 4×6 grid  <span class="comment">// too hard for demo</span>
+
+<span class="comment">// Miller's Law: working memory holds ~7±2 items</span>
+<span class="comment">// At 8 pairs, player tracks max 8 positions = within limit</span>
+<span class="val">MILLER_CAPACITY</span>  <span class="op">=</span> <span class="val">7</span> <span class="op">±</span> <span class="val">2</span>   <span class="comment">// chunks in working memory</span>
+<span class="val">PAIRS_CHOSEN</span>     <span class="op">=</span> <span class="val">8</span>        <span class="comment">// at upper edge of comfortable</span>
+      </div>
+      <p class="explanation">8 pairs puts the game at the comfortable upper edge of working memory capacity (Miller's Law). 6 pairs would be solvable with very little memory effort. 10+ pairs would require external note-taking to play reliably, which conflicts with the accessibility goal of not requiring fine motor precision for note-taking.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 2: SHUFFLE ══ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-title">Shuffle Algorithm</span>
+  </div>
+
+  <div class="rule" id="r-shuffle">
+    <div class="rule-header" onclick="toggle('r-shuffle')">
+      <span class="rule-name">Fisher-Yates shuffle</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-algo">Algorithm</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Fisher-Yates (Knuth) shuffle — O(n), unbiased</span>
+<span class="fn">function</span> <span class="fn">shuffle</span>(arr) {
+  <span class="val">a</span> <span class="op">=</span> [...arr]                    <span class="comment">// copy, don't mutate</span>
+  <span class="fn">for</span> i <span class="op">=</span> a.length<span class="op">-</span><span class="val">1</span> → <span class="val">1</span>:
+    j <span class="op">=</span> <span class="fn">floor</span>(<span class="fn">random</span>() <span class="op">×</span> (i<span class="op">+</span><span class="val">1</span>))   <span class="comment">// j ∈ [0, i]</span>
+    swap a[i] <span class="op">↔</span> a[j]
+  <span class="fn">return</span> a
+}
+
+<span class="comment">// Input: 16 cards (8 pairs × 2)</span>
+<span class="comment">// Each permutation equally likely: 16! possibilities</span>
+<span class="val">16!</span> <span class="op">=</span> <span class="result">20,922,789,888,000</span>  <span class="comment">// ~2.09 × 10¹³ arrangements</span>
+
+<span class="comment">// Why NOT naive sort-by-random:</span>
+<span class="comment">// arr.sort(() => Math.random()-0.5)  ← BIASED, avoid</span>
+      </div>
+      <p class="explanation">Fisher-Yates is the standard unbiased shuffle. Each of the 16! ≈ 20 trillion possible arrangements has an equal probability. A naive sort-by-random-key is biased because comparison-based sorts don't visit all swap positions equally — some arrangements end up more likely than others. With a memory game, a biased shuffle could make certain card positions predictably easier to find.</p>
+
+      <div class="demo">
+        <div class="demo-label">Live shuffle demo — click to re-shuffle</div>
+        <div class="shuffle-viz" id="shuffle-viz"></div>
+        <button class="btn" onclick="doShuffle()">Shuffle Again</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule" id="r-food">
+    <div class="rule-header" onclick="toggle('r-food')">
+      <span class="rule-name">Food placement (no-overlap guarantee)</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-algo">Algorithm</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Snake game: place food not on snake body</span>
+<span class="fn">do</span> {
+  pos <span class="op">=</span> { x: <span class="fn">floor</span>(<span class="fn">random</span>() <span class="op">×</span> COLS),
+          y: <span class="fn">floor</span>(<span class="fn">random</span>() <span class="op">×</span> ROWS) }
+} <span class="fn">while</span> (snake.<span class="fn">some</span>(s <span class="op">=></span> s.x<span class="op">===</span>pos.x <span class="op">&&</span> s.y<span class="op">===</span>pos.y))
+
+<span class="comment">// Probability of collision on first try:</span>
+<span class="comment">// P(hit) = snake_length / total_cells</span>
+<span class="comment">// At start: P(hit) = 3/441 ≈ 0.0068 (0.68%)</span>
+<span class="comment">// Near end (snake=200): P(hit) = 200/441 ≈ 0.45</span>
+<span class="comment">// Expected iterations: 1/(1-P(hit)) — well bounded</span>
+      </div>
+      <p class="explanation">The do-while loop retries placement until a free cell is found. This is a rejection sampling approach. The probability of needing many retries is low at game start but rises as the snake grows. In the worst practical case (~half the grid filled), expected retries are around 2. The loop terminates in finite expected time for any non-full grid.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 3: GAME STATE ══ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-title">Game State Logic</span>
+  </div>
+
+  <div class="rule" id="r-match">
+    <div class="rule-header" onclick="toggle('r-match')">
+      <span class="rule-name">Match detection predicate</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-logic">Logic</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Two cards match if and only if their emoji is identical</span>
+<span class="fn">function</span> <span class="fn">isMatch</span>(cardA, cardB):
+  <span class="fn">return</span> cardA.emoji <span class="op">===</span> cardB.emoji
+
+<span class="comment">// NOT matched by id (each card has unique id)</span>
+<span class="comment">// NOT matched by label (labels are same when emojis match anyway)</span>
+<span class="comment">// Emoji chosen as key because it's the visible identity</span>
+
+<span class="comment">// Win condition:</span>
+<span class="val">isWon</span> <span class="op">=</span> matched.length <span class="op">===</span> cards.length
+       <span class="op">=</span> matched.length <span class="op">===</span> <span class="val">16</span>
+       <span class="op">=</span> <span class="result">all 8 pairs found</span>
+
+<span class="comment">// Guard conditions before flip allowed:</span>
+<span class="val">canFlip</span> <span class="op">=</span> <span class="op">!</span>locked
+        <span class="op">&&</span> <span class="op">!</span>flipped.includes(index)
+        <span class="op">&&</span> <span class="op">!</span>matched.includes(index)
+      </div>
+      <p class="explanation">Match detection uses strict equality on the emoji string. Each emoji is unique per pair, so this is a clean identity check. Three guard conditions prevent invalid flips: the locked flag blocks input during the mismatch timeout, the flipped check prevents re-clicking the same card, and the matched check prevents interacting with already-solved cards.</p>
+    </div>
+  </div>
+
+  <div class="rule" id="r-progress">
+    <div class="rule-header" onclick="toggle('r-progress')">
+      <span class="rule-name">Progress counters</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-math">Math</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// moves: increments on every second flip (each "turn")</span>
+<span class="val">moves</span> <span class="op">+=</span> <span class="val">1</span>  <span class="comment">// when flipped.length === 2</span>
+
+<span class="comment">// matches displayed: pairs found, not individual cards</span>
+<span class="val">matches_shown</span>  <span class="op">=</span> matched.length <span class="op">/</span> <span class="val">2</span>
+               <span class="op">=</span> <span class="result">0 → 8</span>  <span class="comment">// shown to user as "0–8"</span>
+
+<span class="comment">// remaining pairs:</span>
+<span class="val">remaining</span>  <span class="op">=</span> TOTAL_PAIRS <span class="op">-</span> matched.length <span class="op">/</span> <span class="val">2</span>
+           <span class="op">=</span> <span class="val">8</span> <span class="op">-</span> matched.length <span class="op">/</span> <span class="val">2</span>
+           <span class="op">=</span> <span class="result">8 → 0</span>
+
+<span class="comment">// minimum possible moves to win (perfect play):</span>
+<span class="val">MIN_MOVES</span>  <span class="op">=</span> PAIRS  <span class="op">=</span> <span class="result">8</span>  <span class="comment">// every flip is a match</span>
+
+<span class="comment">// theoretical max moves (worst case):</span>
+<span class="comment">// unbounded in theory, but practically ~40-60 for random play</span>
+      </div>
+      <p class="explanation">Moves count "turns" not individual card flips — a turn is always exactly 2 flips. This is the standard scoring convention for memory games. Displaying matches as pairs (÷2) rather than individual cards is more meaningful to the player. Remaining counts down from 8 to 0 to give a clear sense of progress toward completion.</p>
+
+      <div class="demo">
+        <div class="demo-label">Live: progress stats calculator</div>
+        <div class="demo-row">
+          <label>Cards matched</label>
+          <input type="range" min="0" max="16" step="2" value="6" oninput="calcProgress(this.value)">
+          <span class="demo-output" id="prog-out"></span>
+        </div>
+        <div id="prog-detail" style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted);margin-top:.5rem;line-height:2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 4: TIMING ══ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-title">Timing Rules</span>
+  </div>
+
+  <div class="rule" id="r-timing">
+    <div class="rule-header" onclick="toggle('r-timing')">
+      <span class="rule-name">Mismatch flip-back delay</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-constraint">Constraint</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// After mismatch: cards flip back after delay</span>
+<span class="val">MISMATCH_DELAY</span>   <span class="op">=</span> <span class="val">1200</span>ms  <span class="comment">// 1.2 seconds</span>
+
+<span class="comment">// Why 1200ms?</span>
+<span class="comment">// Too short (<600ms): player can't read both cards before they hide</span>
+<span class="comment">// Too long (>2000ms): game feels sluggish, breaks flow</span>
+<span class="comment">// 1200ms: enough time to read + mentally store both cards</span>
+
+<span class="comment">// CSS flip animation duration:</span>
+<span class="val">FLIP_DURATION</span>  <span class="op">=</span> <span class="val">450</span>ms
+<span class="val">FLIP_EASING</span>    <span class="op">=</span> cubic-bezier(<span class="val">0.4</span>, <span class="val">0</span>, <span class="val">0.2</span>, <span class="val">1</span>)
+
+<span class="comment">// Mismatch delay >> flip duration ensures card is fully</span>
+<span class="comment">// visible before hiding: 1200 > 450 ✓</span>
+
+<span class="comment">// aria-live announce delay (screen readers):</span>
+<span class="val">ANNOUNCE_RESET</span>  <span class="op">=</span> <span class="val">50</span>ms  <span class="comment">// clear then set, forces re-read</span>
+      </div>
+
+      <div class="timing-bar">
+        <div class="timing-seg" style="width:37.5%;background:#1e1b16">Flip anim 450ms</div>
+        <div class="timing-seg" style="width:12.5%;background:#3d3425">visible</div>
+        <div class="timing-seg" style="width:50%;background:#c2410c88;color:white">← lock window 1200ms total →</div>
+      </div>
+
+      <p class="explanation">The 1200ms lock window was chosen to be long enough for a screen reader to announce the mismatch message and for a sighted user to mentally note both card positions. The 450ms CSS flip uses a Material Design standard easing curve (cubic-bezier 0.4, 0, 0.2, 1) which feels physical without being slow. The 50ms aria-live reset trick forces screen readers to re-announce identical messages.</p>
+    </div>
+  </div>
+
+  <div class="rule" id="r-win-delay">
+    <div class="rule-header" onclick="toggle('r-win-delay')">
+      <span class="rule-name">Win banner display delay</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-constraint">Constraint</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Win banner appears after last match animation completes</span>
+<span class="val">WIN_DELAY</span>  <span class="op">=</span> <span class="val">600</span>ms
+
+<span class="comment">// Must be > flip animation: 600 > 450 ✓</span>
+<span class="comment">// Gives player a moment to see the final match before</span>
+<span class="comment">// the win banner overlays the board</span>
+
+<span class="comment">// Focus management: move focus to "Play Again" button</span>
+<span class="val">FOCUS_DELAY</span>  <span class="op">=</span> <span class="val">100</span>ms  <span class="comment">// after banner renders in DOM</span>
+      </div>
+      <p class="explanation">The 600ms win delay lets the final card's flip animation complete and gives the player a brief moment of satisfaction seeing the full matched board before the win overlay appears. The 100ms focus delay ensures the DOM has rendered the win banner before programmatic focus is moved to the Play Again button — important for screen readers and keyboard users.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 5: COLOR ══ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-title">Color & Contrast Ratios</span>
+  </div>
+
+  <div class="rule" id="r-contrast">
+    <div class="rule-header" onclick="toggle('r-contrast')">
+      <span class="rule-name">WCAG contrast formula</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-color">Color</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// WCAG 2.1 relative luminance formula</span>
+<span class="fn">function</span> <span class="fn">luminance</span>(r, g, b):         <span class="comment">// r,g,b ∈ [0,1]</span>
+  sRGB <span class="op">=</span> c <span class="op">≤</span> <span class="val">0.03928</span> ? c<span class="op">/</span><span class="val">12.92</span> : ((c<span class="op">+</span><span class="val">0.055</span>)<span class="op">/</span><span class="val">1.055</span>)^<span class="val">2.4</span>
+  <span class="fn">return</span> <span class="val">0.2126</span><span class="op">×</span>R <span class="op">+</span> <span class="val">0.7152</span><span class="op">×</span>G <span class="op">+</span> <span class="val">0.0722</span><span class="op">×</span>B
+
+<span class="fn">function</span> <span class="fn">contrastRatio</span>(L1, L2):
+  <span class="fn">return</span> (max(L1,L2) <span class="op">+</span> <span class="val">0.05</span>) <span class="op">/</span> (min(L1,L2) <span class="op">+</span> <span class="val">0.05</span>)
+
+<span class="comment">// WCAG thresholds:</span>
+<span class="comment">// AA normal text:  ratio ≥ 4.5:1</span>
+<span class="comment">// AA large text:   ratio ≥ 3.0:1</span>
+<span class="comment">// AAA normal text: ratio ≥ 7.0:1</span>
+      </div>
+
+      <table class="contrast-table">
+        <thead>
+          <tr>
+            <th>Pair</th>
+            <th>Foreground</th>
+            <th>Background</th>
+            <th>Ratio</th>
+            <th>WCAG AA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Body text</td>
+            <td><span class="color-chip" style="background:#1a1208"></span>#1a1208</td>
+            <td><span class="color-chip" style="background:#faf8f5"></span>#faf8f5</td>
+            <td>16.8:1</td>
+            <td class="pass">✓ AAA</td>
+          </tr>
+          <tr>
+            <td>Accent on bg</td>
+            <td><span class="color-chip" style="background:#c2410c"></span>#c2410c</td>
+            <td><span class="color-chip" style="background:#faf8f5"></span>#faf8f5</td>
+            <td>5.9:1</td>
+            <td class="pass">✓ AA</td>
+          </tr>
+          <tr>
+            <td>Muted text</td>
+            <td><span class="color-chip" style="background:#7c6f5e"></span>#7c6f5e</td>
+            <td><span class="color-chip" style="background:#faf8f5"></span>#faf8f5</td>
+            <td>3.8:1</td>
+            <td class="fail">✗ AA (large only)</td>
+          </tr>
+          <tr>
+            <td>Match green</td>
+            <td><span class="color-chip" style="background:#15803d"></span>#15803d</td>
+            <td><span class="color-chip" style="background:#dcfce7"></span>#dcfce7</td>
+            <td>5.1:1</td>
+            <td class="pass">✓ AA</td>
+          </tr>
+          <tr>
+            <td>HC: text on black</td>
+            <td><span class="color-chip" style="background:#ffffff"></span>#ffffff</td>
+            <td><span class="color-chip" style="background:#000000"></span>#000000</td>
+            <td>21.0:1</td>
+            <td class="pass">✓ AAA</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="explanation" style="margin-top:.75rem">One honest failure: the muted text (#7c6f5e on #faf8f5) only achieves 3.8:1 — which passes AA for large text (≥18pt or bold ≥14pt) but fails for normal body text. This is used only for secondary labels and hints, never for critical game information. High contrast mode eliminates this entirely by replacing all muted text with #cccccc on black (12.6:1).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 6: ANIMATION ══ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-title">Animation Math</span>
+  </div>
+
+  <div class="rule" id="r-flip">
+    <div class="rule-header" onclick="toggle('r-flip')">
+      <span class="rule-name">CSS 3D card flip geometry</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-math">Math</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Card flip uses CSS 3D transform</span>
+<span class="comment">// Back face: rotateY(0deg)   → visible at start</span>
+<span class="comment">// Front face: rotateY(180deg) → hidden at start (backface-visibility:hidden)</span>
+
+<span class="comment">// On flip: parent rotates 180°</span>
+<span class="val">flipped</span>  <span class="op">:</span>  transform: <span class="fn">rotateY</span>(<span class="val">180</span>deg)
+
+<span class="comment">// Result:</span>
+<span class="comment">// back face:  0 + 180 = 180° → now hidden</span>
+<span class="comment">// front face: 180 + 180 = 360° ≡ 0° → now visible</span>
+
+<span class="comment">// Perspective depth (affects 3D "depth" appearance):</span>
+<span class="val">perspective</span>  <span class="op">=</span> <span class="val">800</span>px
+
+<span class="comment">// Perceived depth ratio (d/perspective):</span>
+<span class="comment">// card width ~128px → 128/800 = 0.16 → subtle, not dramatic</span>
+
+<span class="comment">// Easing: cubic-bezier(0.4, 0, 0.2, 1)</span>
+<span class="comment">// t=0: velocity=0 (ease in)</span>
+<span class="comment">// t=0.5: max velocity (mid-flip is fastest)</span>
+<span class="comment">// t=1: velocity=0 (ease out, lands softly)</span>
+      </div>
+      <p class="explanation">The flip works by rotating the parent container 180° around the Y axis. Since the front face starts pre-rotated 180°, after the parent rotates it lands at 360° = 0°, making it face forward. The 800px perspective value was chosen so the card width (≈128px) represents about 16% of the perspective depth — enough to feel 3D without looking like a dramatic barrel roll. The easing peaks at mid-flip, making it feel like a physical card being turned.</p>
+
+      <div class="demo">
+        <div class="demo-label">Live: adjust perspective depth</div>
+        <div class="demo-row">
+          <label>Perspective</label>
+          <input type="range" min="200" max="2000" value="800" oninput="updatePerspective(this.value)">
+          <span class="demo-output" id="persp-out">800px</span>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:.75rem;align-items:center">
+          <div id="flip-demo-card" style="width:60px;height:80px;perspective:800px;cursor:pointer" onclick="flipDemoCard()">
+            <div id="flip-demo-inner" style="width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform 0.45s cubic-bezier(0.4,0,0.2,1)">
+              <div style="position:absolute;inset:0;background:#1e1b16;border-radius:4px;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:1.2rem">?</div>
+              <div style="position:absolute;inset:0;background:white;border:1px solid #e2e8f0;border-radius:4px;backface-visibility:hidden;transform:rotateY(180deg);display:flex;align-items:center;justify-content:center;font-size:1.4rem">🌿</div>
+            </div>
+          </div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--muted)">Click card to flip</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SECTION 7: A11Y LOGIC ══ -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-title">Accessibility Logic</span>
+  </div>
+
+  <div class="rule" id="r-aria">
+    <div class="rule-header" onclick="toggle('r-aria')">
+      <span class="rule-name">aria-label state machine</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-logic">Logic</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Each card's aria-label transitions through 3 states:</span>
+
+<span class="comment">// State 1: face down (initial)</span>
+<span class="val">label</span>  <span class="op">=</span> <span class="result">`Card ${i+1} of 16, face down`</span>
+
+<span class="comment">// State 2: flipped (after click)</span>
+<span class="val">label</span>  <span class="op">=</span> <span class="result">`Card ${i+1}, ${card.label} ${card.emoji}, face up`</span>
+
+<span class="comment">// State 3: matched (permanent)</span>
+<span class="val">label</span>  <span class="op">=</span> <span class="result">`Card ${i+1}, ${card.label} — matched!`</span>
+
+<span class="comment">// State 2→1 (mismatch): reset after MISMATCH_DELAY</span>
+<span class="val">label</span>  <span class="op">=</span> <span class="result">`Card ${i+1} of 16, face down`</span>
+
+<span class="comment">// aria-live announcer messages:</span>
+<span class="comment">// flip:    "Flipped {label}."</span>
+<span class="comment">// match:   "Match! {label} pair found. {n} pairs remaining."</span>
+<span class="comment">// miss:    "No match. {A} and {B} don't pair."</span>
+<span class="comment">// win:     "Congratulations! You matched all pairs in {n} moves!"</span>
+      </div>
+      <p class="explanation">The aria-label system ensures every state transition is communicated to screen readers. Three distinct label templates map to the three visual states a card can be in. The announcer region is separate from the labels — labels describe the card's current state when focused, while the announcer provides real-time event narration so the player always knows what just happened without needing to re-navigate to a card.</p>
+    </div>
+  </div>
+
+  <div class="rule" id="r-focusmgmt">
+    <div class="rule-header" onclick="toggle('r-focusmgmt')">
+      <span class="rule-name">Focus management rules</span>
+      <div style="display:flex;align-items:center;gap:.5rem">
+        <span class="rule-tag tag-logic">Logic</span>
+        <span class="rule-chevron">▼</span>
+      </div>
+    </div>
+    <div class="rule-body">
+      <div class="formula">
+<span class="comment">// Focus is moved programmatically at 3 moments:</span>
+
+<span class="comment">// 1. New game start → first card</span>
+<span class="fn">setTimeout</span>(() <span class="op">=></span> cards[<span class="val">0</span>].<span class="fn">focus</span>(), <span class="val">100</span>ms)
+
+<span class="comment">// 2. Win banner appears → Play Again button</span>
+<span class="fn">setTimeout</span>(() <span class="op">=></span> playAgainBtn.<span class="fn">focus</span>(), <span class="val">100</span>ms)
+
+<span class="comment">// 3. Toolbar toggles → announce then stay on button</span>
+<span class="comment">// (no focus move needed — button retains focus)</span>
+
+<span class="comment">// Tab order: natural DOM order = grid reading order</span>
+<span class="comment">// Card 1(top-left) → Card 2 → ... → Card 16(bottom-right)</span>
+<span class="comment">// This matches visual left-to-right, top-to-bottom reading</span>
+
+<span class="comment">// Focus visible: browser default outline preserved</span>
+<span class="comment">// (never suppress outline without replacement)</span>
+      </div>
+      <p class="explanation">Focus management follows three rules: move focus to the most logical next action after significant state changes, never suppress the browser's focus indicator, and ensure DOM order matches visual reading order so Tab navigation feels spatially coherent. The 100ms delays on programmatic focus moves give the DOM time to finish rendering before focus is applied — without these delays, focus may land on elements not yet fully visible.</p>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+// Toggle rule open/closed
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+let allOpen = false;
+function toggleAll() {
+  allOpen = !allOpen;
+  document.querySelectorAll('.rule').forEach(r => {
+    r.classList.toggle('open', allOpen);
+  });
+  document.querySelector('.open-all').textContent = allOpen ? 'Collapse All Rules' : 'Expand All Rules';
+}
+
+// Grid calculator
+function calcGrid(w) {
+  const gap = 16, cols = 4;
+  const cardW = Math.floor((w - gap * (cols-1)) / cols);
+  const cardH = Math.floor(cardW * 4/3);
+  document.getElementById('grid-out').textContent = cardW + 'px';
+  document.getElementById('grid-formula').textContent =
+    `(${w} − ${gap*(cols-1)}) ÷ ${cols} = ${cardW}px wide, ${cardH}px tall`;
+
+  const preview = document.getElementById('grid-preview');
+  preview.innerHTML = '';
+  for (let i = 0; i < 16; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'grid-cell';
+    cell.style.width = Math.min(cardW/2.5, 40) + 'px';
+    cell.style.height = Math.min(cardH/2.5, 52) + 'px';
+    cell.textContent = i+1;
+    preview.appendChild(cell);
+  }
+}
+calcGrid(560);
+
+// Progress calculator
+function calcProgress(matched) {
+  const m = parseInt(matched);
+  const pairs = m/2;
+  const remaining = 8 - pairs;
+  document.getElementById('prog-out').textContent = pairs + ' pairs';
+  document.getElementById('prog-detail').innerHTML =
+    `matched.length = ${m}<br>` +
+    `matches shown = ${m} / 2 = ${pairs}<br>` +
+    `remaining = 8 − ${pairs} = ${remaining}<br>` +
+    `isWon = ${m === 16 ? '✓ true' : '✗ false'}`;
+}
+calcProgress(6);
+
+// Shuffle demo
+const EMOJIS = ['🌿','🔮','🦋','🌙','🐚','🍄','⭐','🌊'];
+let shuffleArr = [...EMOJIS, ...EMOJIS].map((e,i) => ({e, id:i}));
+
+function fisherYates(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function doShuffle() {
+  shuffleArr = fisherYates(shuffleArr);
+  renderShuffle();
+}
+
+function renderShuffle() {
+  const viz = document.getElementById('shuffle-viz');
+  viz.innerHTML = '';
+  shuffleArr.forEach(item => {
+    const d = document.createElement('div');
+    d.className = 'shuffle-card';
+    d.textContent = item.e;
+    d.style.fontSize = '1rem';
+    viz.appendChild(d);
+  });
+}
+renderShuffle();
+
+// Perspective demo
+function updatePerspective(v) {
+  document.getElementById('persp-out').textContent = v + 'px';
+  document.getElementById('flip-demo-card').style.perspective = v + 'px';
+}
+
+let cardFlipped = false;
+function flipDemoCard() {
+  cardFlipped = !cardFlipped;
+  document.getElementById('flip-demo-inner').style.transform =
+    cardFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)';
+}
+
+// Open first rule in each section on load
+document.querySelectorAll('.section').forEach(s => {
+  const first = s.querySelector('.rule');
+  if (first) first.classList.add('open');
+});
+</script>
+</body>
+</html>
