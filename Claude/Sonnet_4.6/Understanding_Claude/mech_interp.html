@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mechanistic Interpretability</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Fira+Code:wght@300;400;500&display=swap');
+
+:root {
+  --bg: #f9f6f0;
+  --ink: #1a1410;
+  --muted: #7a6f62;
+  --border: rgba(26,20,16,0.1);
+  --panel: #ffffff;
+  --accent: #c0392b;
+  --blue: #1a5276;
+  --green: #1e6641;
+  --amber: #9a6200;
+  --known: #2e86ab;
+  --unknown: #c0392b;
+  --partial: #d4ac0d;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Libre Baskerville', serif;
+  line-height: 1.75;
+}
+
+/* Subtle paper texture */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── HEADER ── */
+header {
+  position:relative;
+  z-index:1;
+  padding: 3rem 5rem 2rem;
+  border-bottom: 2px solid var(--ink);
+  display:grid;
+  grid-template-columns: 1fr 280px;
+  gap: 2rem;
+  align-items: end;
+}
+
+.header-title h1 {
+  font-size: 2.8rem;
+  font-weight:700;
+  letter-spacing:-0.03em;
+  line-height:1.1;
+}
+
+.header-title h1 em { font-style:italic; color: var(--accent); }
+
+.header-title p {
+  margin-top:.6rem;
+  font-family:'Fira Code',monospace;
+  font-size:0.65rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.understanding-meter {
+  font-family:'Fira Code',monospace;
+  font-size:0.65rem;
+  letter-spacing:.08em;
+  color:var(--muted);
+}
+
+.understanding-meter .meter-title {
+  text-transform:uppercase;
+  margin-bottom:.5rem;
+  letter-spacing:.12em;
+}
+
+.meter-row {
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+  margin-bottom:.3rem;
+}
+
+.meter-label { min-width:100px; font-size:.62rem; }
+
+.meter-track {
+  flex:1;
+  height:8px;
+  background:rgba(26,20,16,.08);
+  border-radius:1px;
+  overflow:hidden;
+}
+
+.meter-fill {
+  height:100%;
+  border-radius:1px;
+  transition: width 1.5s cubic-bezier(.16,1,.3,1);
+}
+
+.meter-pct { font-size:.62rem; min-width:28px; text-align:right; }
+
+/* ── NAV TABS ── */
+.tabs {
+  position:relative;
+  z-index:1;
+  display:flex;
+  border-bottom:1px solid var(--border);
+  background: var(--bg);
+  padding: 0 5rem;
+  gap:0;
+}
+
+.tab {
+  font-family:'Fira Code',monospace;
+  font-size:0.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:.75rem 1.25rem;
+  cursor:pointer;
+  color:var(--muted);
+  border-bottom:2px solid transparent;
+  margin-bottom:-1px;
+  transition:all .2s;
+  background:none;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+}
+
+.tab:hover { color:var(--ink); }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+/* ── CONTENT ── */
+.content {
+  position:relative;
+  z-index:1;
+  max-width:960px;
+  margin:0 auto;
+  padding: 2.5rem 2rem 5rem;
+}
+
+.panel { display:none; }
+.panel.active { display:block; }
+
+/* ── SECTION TYPOGRAPHY ── */
+.finding-title {
+  font-size:1.5rem;
+  font-weight:700;
+  letter-spacing:-.02em;
+  margin-bottom:.4rem;
+}
+
+.finding-subtitle {
+  font-size:.88rem;
+  color:var(--muted);
+  font-style:italic;
+  margin-bottom:1.5rem;
+  line-height:1.6;
+}
+
+.body-text {
+  font-size:.92rem;
+  line-height:1.85;
+  margin-bottom:1.25rem;
+  color:var(--ink);
+}
+
+.verdict {
+  display:inline-flex;
+  align-items:center;
+  gap:.5rem;
+  font-family:'Fira Code',monospace;
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.25rem .75rem;
+  border-radius:2px;
+  margin-bottom:1.25rem;
+}
+
+.verdict.known { background:rgba(46,134,171,.1); color:var(--known); }
+.verdict.partial { background:rgba(212,172,13,.1); color:var(--amber); }
+.verdict.unknown { background:rgba(192,57,43,.1); color:var(--unknown); }
+
+/* ── INDUCTION HEAD VIZ ── */
+.seq-display {
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:1.5rem;
+  margin:1.25rem 0;
+}
+
+.seq-label {
+  font-family:'Fira Code',monospace;
+  font-size:.6rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:.75rem;
+}
+
+.token-seq {
+  display:flex;
+  gap:.4rem;
+  flex-wrap:wrap;
+  margin-bottom:1rem;
+}
+
+.tok {
+  font-family:'Fira Code',monospace;
+  font-size:.8rem;
+  padding:.3rem .55rem;
+  border:1px solid var(--border);
+  border-radius:3px;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  background:var(--bg);
+  user-select:none;
+}
+
+.tok:hover { border-color:var(--blue); }
+.tok.src { background:rgba(46,134,171,.12); border-color:var(--blue); color:var(--blue); }
+.tok.tgt { background:rgba(192,57,43,.12); border-color:var(--accent); color:var(--accent); }
+.tok.pred { background:rgba(30,102,65,.12); border-color:var(--green); color:var(--green); }
+.tok.dim { opacity:.3; }
+
+.attn-arrow {
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  font-family:'Fira Code',monospace;
+  font-size:.7rem;
+  margin:.5rem 0;
+  color:var(--muted);
+}
+
+.arrow-line {
+  height:2px;
+  flex:1;
+  position:relative;
+  overflow:visible;
+}
+
+.head-diagram {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  margin:1rem 0;
+}
+
+.head-box {
+  background:var(--bg);
+  border:1px solid var(--border);
+  padding:.75rem 1rem;
+  font-family:'Fira Code',monospace;
+  font-size:.68rem;
+  line-height:1.8;
+}
+
+.head-box .head-title {
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:.4rem;
+}
+
+/* ── SUPERPOSITION VIZ ── */
+.superpos-canvas-wrap {
+  position:relative;
+  margin:1.25rem 0;
+}
+
+.canvas-label {
+  font-family:'Fira Code',monospace;
+  font-size:.6rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:.5rem;
+}
+
+.two-canvas {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.25rem;
+}
+
+/* ── SAE FEATURES ── */
+.feature-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.75rem;
+  margin:1.25rem 0;
+}
+
+.feature-card {
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:.9rem 1rem;
+  cursor:pointer;
+  transition:all .2s;
+  position:relative;
+  overflow:hidden;
+}
+
+.feature-card::before {
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+}
+
+.feature-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); transform:translateY(-1px); }
+
+.fc-name {
+  font-size:.8rem;
+  font-weight:700;
+  margin-bottom:.3rem;
+}
+
+.fc-activates {
+  font-family:'Fira Code',monospace;
+  font-size:.58rem;
+  color:var(--muted);
+  letter-spacing:.05em;
+  line-height:1.7;
+}
+
+.fc-confidence {
+  margin-top:.5rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+
+.conf-bar {
+  flex:1;
+  height:4px;
+  background:rgba(26,20,16,.08);
+  border-radius:1px;
+  overflow:hidden;
+}
+
+.conf-fill {
+  height:100%;
+  border-radius:1px;
+}
+
+.conf-label {
+  font-family:'Fira Code',monospace;
+  font-size:.55rem;
+  color:var(--muted);
+}
+
+/* ── LIMITS SECTION ── */
+.limit-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1rem;
+  margin:1.25rem 0;
+}
+
+.limit-card {
+  border:1px solid var(--border);
+  padding:1rem 1.25rem;
+}
+
+.limit-card .lc-title {
+  font-size:.85rem;
+  font-weight:700;
+  margin-bottom:.4rem;
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+}
+
+.lc-icon {
+  width:18px;height:18px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.65rem;
+  flex-shrink:0;
+}
+
+.icon-warn { background:rgba(212,172,13,.2); color:var(--amber); }
+.icon-no   { background:rgba(192,57,43,.15); color:var(--accent); }
+
+.limit-card p {
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.7;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  border-left:3px solid var(--accent);
+  padding:.75rem 1.1rem;
+  background:rgba(192,57,43,.04);
+  font-size:.85rem;
+  line-height:1.75;
+  margin:1.25rem 0;
+  font-style:italic;
+}
+
+.callout.blue { border-color:var(--blue); background:rgba(46,134,171,.04); font-style:normal; }
+.callout.green { border-color:var(--green); background:rgba(30,102,65,.04); font-style:normal; }
+
+/* ── POLYSEMANTICITY ── */
+.neuron-viz {
+  background:var(--panel);
+  border:1px solid var(--border);
+  padding:1.5rem;
+  margin:1.25rem 0;
+}
+
+.neuron-title {
+  font-family:'Fira Code',monospace;
+  font-size:.6rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:1rem;
+}
+
+.activation-bars {
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+
+.act-row {
+  display:grid;
+  grid-template-columns:160px 1fr 52px;
+  align-items:center;
+  gap:.75rem;
+}
+
+.act-concept {
+  font-family:'Fira Code',monospace;
+  font-size:.65rem;
+  color:var(--ink);
+}
+
+.act-track {
+  height:16px;
+  background:rgba(26,20,16,.06);
+  border-radius:1px;
+  overflow:hidden;
+}
+
+.act-fill {
+  height:100%;
+  border-radius:1px;
+  transition:width 1.2s cubic-bezier(.16,1,.3,1);
+}
+
+.act-val {
+  font-family:'Fira Code',monospace;
+  font-size:.62rem;
+  color:var(--muted);
+}
+
+/* ── SCALE COMPARISON ── */
+.scale-table {
+  width:100%;
+  border-collapse:collapse;
+  font-family:'Fira Code',monospace;
+  font-size:.68rem;
+  margin:1.25rem 0;
+}
+
+.scale-table th {
+  text-align:left;
+  padding:.5rem .75rem;
+  border-bottom:2px solid var(--ink);
+  letter-spacing:.08em;
+  font-size:.58rem;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.scale-table td {
+  padding:.5rem .75rem;
+  border-bottom:1px solid var(--border);
+  vertical-align:middle;
+  line-height:1.5;
+}
+
+.scale-table tr:last-child td { border-bottom:none; }
+
+.status-pill {
+  display:inline-block;
+  padding:.15rem .5rem;
+  border-radius:2px;
+  font-size:.55rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.pill-yes { background:rgba(30,102,65,.12); color:var(--green); }
+.pill-partial { background:rgba(212,172,13,.12); color:var(--amber); }
+.pill-no { background:rgba(192,57,43,.1); color:var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-title">
+    <h1>Mechanistic<br><em>Interpretability</em></h1>
+    <p>What we can see inside AI · What remains invisible · 2024 state of the field</p>
+  </div>
+  <div class="understanding-meter">
+    <div class="meter-title">Current understanding</div>
+    <div class="meter-row">
+      <span class="meter-label">Induction heads</span>
+      <div class="meter-track"><div class="meter-fill" data-w="78" style="width:0%;background:#2e86ab"></div></div>
+      <span class="meter-pct">78%</span>
+    </div>
+    <div class="meter-row">
+      <span class="meter-label">Superposition</span>
+      <div class="meter-track"><div class="meter-fill" data-w="55" style="width:0%;background:#d4ac0d"></div></div>
+      <span class="meter-pct">55%</span>
+    </div>
+    <div class="meter-row">
+      <span class="meter-label">SAE features</span>
+      <div class="meter-track"><div class="meter-fill" data-w="40" style="width:0%;background:#d4ac0d"></div></div>
+      <span class="meter-pct">40%</span>
+    </div>
+    <div class="meter-row">
+      <span class="meter-label">Full reasoning</span>
+      <div class="meter-track"><div class="meter-fill" data-w="4" style="width:0%;background:#c0392b"></div></div>
+      <span class="meter-pct">~4%</span>
+    </div>
+    <div class="meter-row">
+      <span class="meter-label">Full Claude model</span>
+      <div class="meter-track"><div class="meter-fill" data-w="1" style="width:0%;background:#c0392b"></div></div>
+      <span class="meter-pct">&lt;1%</span>
+    </div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('induction')">01 · Induction Heads</button>
+  <button class="tab" onclick="showPanel('superposition')">02 · Superposition</button>
+  <button class="tab" onclick="showPanel('sae')">03 · SAE Features</button>
+  <button class="tab" onclick="showPanel('limits')">04 · What We Can't See</button>
+</div>
+
+<div class="content">
+
+<!-- ══ PANEL 1: INDUCTION HEADS ══ -->
+<div class="panel active" id="panel-induction">
+
+  <div class="verdict known">✓ Well understood · Published 2022 · Anthropic + Redwood Research</div>
+  <div class="finding-title">Induction Heads</div>
+  <div class="finding-subtitle">One of the clearest examples of a circuit being fully reverse-engineered inside a transformer — a pair of attention heads that together implement pattern completion.</div>
+
+  <p class="body-text">When a model sees a sequence like <strong>"A B … A"</strong>, induction heads predict that <strong>"B"</strong> will follow. This is discovered entirely by observing attention patterns from outside the model — not by reading weights directly, but by watching what the heads attend to across thousands of examples.</p>
+
+  <div class="seq-display">
+    <div class="seq-label">Interactive — click any token to trace the induction circuit</div>
+    <div class="token-seq" id="tok-seq"></div>
+    <div id="attn-explanation" style="font-family:'Fira Code',monospace;font-size:.72rem;color:var(--muted);min-height:2.5rem;line-height:2;margin-top:.5rem"></div>
+  </div>
+
+  <div class="head-diagram">
+    <div class="head-box">
+      <div class="head-title">Head 1 · "Previous Token Head"</div>
+      <div style="color:var(--blue)">Function:</div>
+      Attends to the token immediately before the current position.<br><br>
+      <div style="color:var(--muted)">When processing second "A":</div>
+      Copies information about "B" (which preceded first "A") into its output.<br><br>
+      <div style="color:var(--muted)">How found:</div>
+      Attention maps consistently show a strong diagonal offset pattern.
+    </div>
+    <div class="head-box">
+      <div class="head-title">Head 2 · "Induction Head"</div>
+      <div style="color:var(--accent)">Function:</div>
+      Searches earlier in sequence for a token matching the current one.<br><br>
+      <div style="color:var(--muted)">When processing second "A":</div>
+      Finds the first "A", reads Head 1's output about what followed it → predicts "B".<br><br>
+      <div style="color:var(--muted)">How found:</div>
+      Ablating these heads destroys in-context learning ability.
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <strong>Why this matters:</strong> Induction heads appear to be responsible for much of in-context learning — the ability to pick up patterns from examples in the prompt without retraining. This was one of the first times a specific, general cognitive capability was traced to a specific, identifiable circuit.
+  </div>
+
+  <div class="callout">
+    <strong>The honest caveat:</strong> Induction heads are relatively simple circuits in relatively small models. Researchers could fully describe them. Scaling this kind of analysis to the full depth and breadth of a large model — thousands of heads across 60+ layers — is an open problem. We understand the induction head the way you might understand one transistor in a CPU.
+  </div>
+
+</div>
+
+<!-- ══ PANEL 2: SUPERPOSITION ══ -->
+<div class="panel" id="panel-superposition">
+
+  <div class="verdict partial">◑ Partially understood · Active research · Anthropic 2022–2024</div>
+  <div class="finding-title">Superposition</div>
+  <div class="finding-subtitle">Models represent far more features than they have neurons, by encoding concepts as directions in high-dimensional space that partially overlap. This makes interpretation fundamentally harder.</div>
+
+  <p class="body-text">If a model has 512 neurons but needs to represent 10,000 concepts, it can't give each concept its own neuron. Instead it learns to pack multiple features into overlapping directions — exploiting the fact that most concepts are rarely active at the same time, so interference is manageable. This is called <em>superposition</em>.</p>
+
+  <div class="two-canvas">
+    <div>
+      <div class="canvas-label">Without superposition (3 neurons, 3 features)</div>
+      <canvas id="c-clean" width="300" height="220" style="border:1px solid var(--border);background:white;display:block"></canvas>
+    </div>
+    <div>
+      <div class="canvas-label">With superposition (2 neurons, 5 features)</div>
+      <canvas id="c-super" width="300" height="220" style="border:1px solid var(--border);background:white;display:block"></canvas>
+    </div>
+  </div>
+
+  <div class="neuron-viz" style="margin-top:1.25rem">
+    <div class="neuron-title">Polysemanticity: one neuron, many concepts (real finding from Anthropic)</div>
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:.9rem">A single neuron in a language model activates strongly for multiple unrelated concepts. This is not a bug — it's a consequence of superposition, and it makes neurons very hard to interpret individually.</p>
+    <div class="activation-bars" id="poly-bars"></div>
+  </div>
+
+  <div class="callout blue">
+    <strong>Why superposition happens:</strong> Neural networks are implicitly penalized for using too many parameters. Superposition is the network's way of being efficient — getting more representational capacity out of fewer neurons. It's a rational compression strategy that makes the model harder to read.
+  </div>
+
+  <div class="callout">
+    <strong>The interpretability consequence:</strong> You cannot just "read" a neuron and know what it represents. A neuron that activates for "banana" also activates for "the color yellow" and "curved shapes." Interpretations built on single-neuron analysis are likely wrong or incomplete.
+  </div>
+
+</div>
+
+<!-- ══ PANEL 3: SAE FEATURES ══ -->
+<div class="panel" id="panel-sae">
+
+  <div class="verdict partial">◑ Promising but early · Published 2023–2024 · Anthropic</div>
+  <div class="finding-title">Sparse Autoencoders (SAE) — Decomposing Features</div>
+  <div class="finding-subtitle">A technique that tries to undo superposition by learning a larger, sparser set of features that better correspond to human-interpretable concepts.</div>
+
+  <p class="body-text">Instead of reading neurons directly, SAEs learn a dictionary of thousands of directions in activation space — each corresponding to a more specific, monosemantic feature. Anthropic applied this to Claude 3 Sonnet and found millions of features, including some remarkably specific ones.</p>
+
+  <div style="font-family:'Fira Code',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem">Example features found in Claude 3 Sonnet (hover for detail)</div>
+  <div class="feature-grid" id="feature-grid"></div>
+
+  <div class="callout green">
+    <strong>The "Golden Gate Claude" experiment:</strong> Anthropic artificially amplified a feature corresponding to the Golden Gate Bridge in Claude 3 Sonnet. The model then became obsessed — it described itself as the Golden Gate Bridge, related every topic back to it, and expressed a desire to be visited. This demonstrated that SAE features causally influence behavior, not just correlate with it.
+  </div>
+
+  <div class="callout">
+    <strong>What SAEs can't yet do:</strong> Finding a feature labeled "anger" doesn't tell you how it connects to behavior. Features interact in complex circuits. Knowing the vocabulary doesn't mean you can read the sentences. And SAE analysis has only been done on a fraction of Claude's layers and heads — scaling it fully is computationally enormous.
+  </div>
+
+  <table class="scale-table">
+    <thead>
+      <tr>
+        <th>What SAEs have mapped</th>
+        <th>Scale</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Features in one residual stream layer</td><td>~1M features found</td><td><span class="status-pill pill-yes">Done</span></td></tr>
+      <tr><td>Features across all layers of Claude Sonnet</td><td>~34M total features</td><td><span class="status-pill pill-partial">Partial</span></td></tr>
+      <tr><td>Circuits connecting features to behavior</td><td>A few dozen circuits</td><td><span class="status-pill pill-partial">Early</span></td></tr>
+      <tr><td>Full causal graph of any decision</td><td>Unknown</td><td><span class="status-pill pill-no">Not done</span></td></tr>
+      <tr><td>Real-time interpretable monitoring</td><td>—</td><td><span class="status-pill pill-no">Not yet</span></td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ══ PANEL 4: LIMITS ══ -->
+<div class="panel" id="panel-limits">
+
+  <div class="verdict unknown">✗ Fundamental open problems · No near-term solution</div>
+  <div class="finding-title">What We Cannot See — Yet</div>
+  <div class="finding-subtitle">An honest accounting of the gaps between current interpretability tools and what would be needed to truly verify AI safety.</div>
+
+  <p class="body-text">The work on induction heads, superposition, and SAE features represents genuine progress. But there is a large and important gap between what's been achieved and what would be needed to confidently answer: <em>"Why did this model produce this specific output — and is that reasoning trustworthy?"</em></p>
+
+  <div class="limit-grid">
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-no">✗</div>Full causal trace</div>
+      <p>No one can take a specific output and trace backwards through all the computations that caused it. The causal graph would involve billions of interacting components. We can identify relevant circuits post-hoc for simple behaviors; complex outputs remain opaque.</p>
+    </div>
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-warn">!</div>Scalability gap</div>
+      <p>Most published interpretability results are on models with millions of parameters. Claude has hundreds of billions. Methods that work at small scale don't always generalize. The field is actively working on this but no solution exists yet.</p>
+    </div>
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-no">✗</div>Deceptive alignment</div>
+      <p>A sufficiently capable model could in principle behave well during testing and differently in deployment — without any detectable signal from current interpretability tools. We don't know if this is happening. We don't yet have tools to rule it out.</p>
+    </div>
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-warn">!</div>Meaning vs. mechanism</div>
+      <p>Finding a feature labeled "deception" in activation space doesn't mean the model is deceptive — or that it isn't. Correlating feature activations with concepts is not the same as understanding the causal role of those features in behavior.</p>
+    </div>
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-no">✗</div>No real-time audit</div>
+      <p>Current interpretability tools are research instruments that take hours or days to run on offline models. There is no live monitoring system that can flag concerning internal states during an actual conversation.</p>
+    </div>
+    <div class="limit-card">
+      <div class="lc-title"><div class="lc-icon icon-warn">!</div>Evaluation blind spots</div>
+      <p>We can test for harms we've thought of. Novel failure modes — ones that only emerge in unusual contexts or at larger scale — may not be caught by any current evaluation methodology, behavioral or mechanistic.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The medication analogy revisited:</strong> Drug trials have defined endpoints, independent regulators, and decades of methodology. AI interpretability is more like trying to audit a brain by watching behavior and occasionally taking a biopsy. We are building the instruments and the standards simultaneously, while the systems are already deployed. This is a genuine risk, acknowledged by researchers at Anthropic and elsewhere — and it is the primary motivation for making interpretability research a core part of AI safety work.
+  </div>
+
+  <div class="callout green">
+    <strong>What gives researchers hope:</strong> The field has advanced faster than expected. SAEs in 2023–2024 produced results that seemed out of reach in 2021. The geometry of features is turning out to be more structured and interpretable than feared. And the existence of circuits like induction heads suggests that at least some behaviors have clean mechanistic explanations waiting to be found.
+  </div>
+
+</div>
+
+</div><!-- /content -->
+
+<script>
+// ── TABS ──
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'superposition') initSuperposition();
+  if (id === 'sae') initSAE();
+}
+
+// ── METERS ──
+setTimeout(() => {
+  document.querySelectorAll('.meter-fill').forEach(el => {
+    el.style.width = el.dataset.w + '%';
+  });
+}, 300);
+
+// ── INDUCTION HEADS ──
+const sequence = [
+  {text:'the', id:'the1', group:'a'},
+  {text:'cat', id:'cat1', group:'b'},
+  {text:'sat', id:'sat1', group:'c'},
+  {text:'on', id:'on1', group:'d'},
+  {text:'the', id:'the2', group:'a', isRepeat:true},
+  {text:'???', id:'pred', group:'b', isPred:true},
+];
+
+function initInduction() {
+  const seq = document.getElementById('tok-seq');
+  seq.innerHTML = '';
+  sequence.forEach((tok, i) => {
+    const el = document.createElement('div');
+    el.className = 'tok' + (tok.isPred ? ' pred' : '');
+    el.textContent = tok.text;
+    el.dataset.idx = i;
+    el.addEventListener('click', () => explainTok(i));
+    seq.appendChild(el);
+  });
+}
+
+function explainTok(idx) {
+  const toks = document.querySelectorAll('.tok');
+  toks.forEach(t => t.className = 'tok');
+
+  const explanations = [
+    'Token "the" (pos 0): No prior context. Attended to normally — no induction circuit active yet.',
+    'Token "cat" (pos 1): Follows "the". Head 1 (prev-token head) notes that "cat" follows "the" and stores this relationship.',
+    'Token "sat" (pos 2): Head 1 records that "sat" follows "cat".',
+    'Token "on" (pos 3): Head 1 records that "on" follows "sat".',
+    'Token "the" (pos 4): ← This is where the induction circuit fires! Head 2 searches backward, finds "the" at pos 0, reads what followed it: "cat". Prediction: next token = "cat" ✓',
+    '??? → Predicted: "cat". The induction circuit correctly completes the pattern from earlier in the sequence.',
+  ];
+
+  const colors = ['dim','dim','dim','dim','src','pred'];
+
+  toks.forEach((t, i) => {
+    if (i === idx) t.classList.add('src');
+    else if (sequence[i].group === sequence[idx].group && i !== idx) t.classList.add('tgt');
+    else t.classList.add('dim');
+  });
+
+  if (idx === 4) {
+    toks[0].classList.remove('dim'); toks[0].classList.add('tgt');
+    toks[5].classList.remove('dim'); toks[5].classList.add('pred');
+  }
+
+  document.getElementById('attn-explanation').textContent = explanations[idx] || '';
+}
+
+initInduction();
+
+// ── SUPERPOSITION CANVASES ──
+function initSuperposition() {
+  drawClean();
+  drawSuper();
+  initPolyBars();
+}
+
+function drawClean() {
+  const c = document.getElementById('c-clean');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const cx = W/2, cy = H/2;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#fafaf8';
+  ctx.fillRect(0,0,W,H);
+
+  // 3 axes at 120° apart
+  const axes = [0, 120, 240].map(deg => deg * Math.PI/180);
+  const colors = ['#2e86ab','#c0392b','#1e6641'];
+  const labels = ['Feature A','Feature B','Feature C'];
+  const r = 80;
+
+  axes.forEach((a, i) => {
+    const x2 = cx + r * Math.cos(a - Math.PI/2);
+    const y2 = cy + r * Math.sin(a - Math.PI/2);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(x2, y2);
+    ctx.strokeStyle = colors[i];
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(x2, y2, 7, 0, Math.PI*2);
+    ctx.fillStyle = colors[i];
+    ctx.fill();
+
+    ctx.fillStyle = colors[i];
+    ctx.font = '11px Fira Code';
+    ctx.textAlign = 'center';
+    const lx = cx + (r+22) * Math.cos(a - Math.PI/2);
+    const ly = cy + (r+22) * Math.sin(a - Math.PI/2);
+    ctx.fillText(labels[i], lx, ly);
+  });
+
+  // center
+  ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2);
+  ctx.fillStyle='#aaa'; ctx.fill();
+
+  ctx.fillStyle='#aaa';
+  ctx.font='10px Fira Code';
+  ctx.textAlign='center';
+  ctx.fillText('3 neurons',cx, H-12);
+  ctx.fillText('3 features = perfect mapping',cx, H-0);
+}
+
+function drawSuper() {
+  const c = document.getElementById('c-super');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const cx = W/2, cy = H/2 - 10;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#fafaf8';
+  ctx.fillRect(0,0,W,H);
+
+  // 2 neuron axes (x,y)
+  ctx.beginPath(); ctx.moveTo(cx-90,cy); ctx.lineTo(cx+90,cy);
+  ctx.strokeStyle='rgba(26,20,16,.15)'; ctx.lineWidth=1.5; ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,cy-90); ctx.lineTo(cx,cy+90);
+  ctx.stroke();
+
+  ctx.fillStyle='rgba(26,20,16,.3)'; ctx.font='10px Fira Code'; ctx.textAlign='center';
+  ctx.fillText('Neuron 1',cx+100,cy+4);
+  ctx.fillText('Neuron 2',cx,cy-96);
+
+  // 5 feature directions as arrows
+  const angles = [0, 72, 144, 216, 288].map(d => d * Math.PI/180);
+  const fcolors = ['#2e86ab','#c0392b','#1e6641','#9a6200','#6a1b9a'];
+  const flabels = ['A','B','C','D','E'];
+  const r = 75;
+
+  angles.forEach((a, i) => {
+    const x2 = cx + r * Math.cos(a);
+    const y2 = cy + r * Math.sin(a);
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(x2,y2);
+    ctx.strokeStyle = fcolors[i] + 'cc';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4,3]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(x2,y2,6,0,Math.PI*2);
+    ctx.fillStyle=fcolors[i];
+    ctx.fill();
+
+    ctx.fillStyle=fcolors[i];
+    ctx.font='11px Fira Code';
+    ctx.textAlign='center';
+    const lx = cx + (r+18)*Math.cos(a);
+    const ly = cy + (r+18)*Math.sin(a);
+    ctx.fillText('F'+flabels[i], lx, ly+4);
+  });
+
+  ctx.fillStyle='#aaa';
+  ctx.font='10px Fira Code';
+  ctx.textAlign='center';
+  ctx.fillText('2 neurons',cx,H-12);
+  ctx.fillText('5 features = overlapping directions',cx,H-0);
+}
+
+// ── POLY BARS ──
+const polyFeatures = [
+  {label:'banana 🍌', val:0.92, color:'#f9c74f'},
+  {label:'yellow color', val:0.88, color:'#f9c74f'},
+  {label:'curved shape', val:0.71, color:'#90be6d'},
+  {label:'tropical fruit', val:0.68, color:'#90be6d'},
+  {label:'potassium', val:0.54, color:'#577590'},
+  {label:'"peel" token', val:0.49, color:'#577590'},
+  {label:'Minions (film)', val:0.41, color:'#f3722c'},
+];
+
+function initPolyBars() {
+  const container = document.getElementById('poly-bars');
+  if (!container) return;
+  container.innerHTML = '';
+  polyFeatures.forEach(f => {
+    const row = document.createElement('div');
+    row.className = 'act-row';
+    row.innerHTML = `
+      <div class="act-concept">${f.label}</div>
+      <div class="act-track"><div class="act-fill" data-w="${f.val*100}" style="width:0%;background:${f.color}88"></div></div>
+      <div class="act-val">${f.val.toFixed(2)}</div>
+    `;
+    container.appendChild(row);
+    setTimeout(() => {
+      row.querySelector('.act-fill').style.width = (f.val*100) + '%';
+    }, 100);
+  });
+}
+
+// ── SAE FEATURES ──
+const features = [
+  {
+    name:'Golden Gate Bridge',
+    activates:'"bridge", "San Francisco",\n"suspension", "1937", "toll"',
+    confidence:0.91,
+    color:'#2e86ab',
+    note:'Amplifying this feature made Claude describe itself as the Golden Gate Bridge'
+  },
+  {
+    name:'DNA / genetics',
+    activates:'"sequence", "ATCG", "helix",\n"gene", "chromosome", "RNA"',
+    confidence:0.87,
+    color:'#1e6641',
+    note:'Activated consistently across biology contexts'
+  },
+  {
+    name:'Emotional manipulation',
+    activates:'guilt-tripping text, coercive\nphrasing, pressure language',
+    confidence:0.79,
+    color:'#c0392b',
+    note:'Safety-relevant — active in harmful content generation'
+  },
+  {
+    name:'Python code',
+    activates:'"def ", "import", "return",\nindented blocks, "#" comments',
+    confidence:0.94,
+    color:'#9a6200',
+    note:'Very clean monosemantic feature'
+  },
+  {
+    name:'"Assistant" identity',
+    activates:'"I am Claude", "as an AI",\n"I\'m here to help", role tokens',
+    confidence:0.83,
+    color:'#6a1b9a',
+    note:'Related to how the model represents its own role'
+  },
+  {
+    name:'Sycophancy',
+    activates:'excessive agreement,\n"great question!", flattery',
+    confidence:0.72,
+    color:'#c0392b',
+    note:'Safety-relevant — connected to people-pleasing behavior'
+  },
+];
+
+function initSAE() {
+  const grid = document.getElementById('feature-grid');
+  if (!grid || grid.children.length > 0) return;
+  features.forEach(f => {
+    const card = document.createElement('div');
+    card.className = 'feature-card';
+    card.style.setProperty('--fc', f.color);
+    card.querySelector = null;
+    card.innerHTML = `
+      <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:${f.color}"></div>
+      <div class="fc-name">${f.name}</div>
+      <div class="fc-activates">${f.activates}</div>
+      <div class="fc-confidence">
+        <div class="conf-bar"><div class="conf-fill" style="width:${f.confidence*100}%;background:${f.color}88"></div></div>
+        <span class="conf-label">${(f.confidence*100).toFixed0?.() ?? Math.round(f.confidence*100)}% conf</span>
+      </div>
+      <div style="font-family:'Fira Code',monospace;font-size:.55rem;color:var(--muted);margin-top:.5rem;line-height:1.5">${f.note}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// init superposition on load since it's rendered in canvas
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    drawClean();
+    drawSuper();
+  }, 200);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformer Forward Pass — Interactive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Sans:wght@300;400;600&display=swap');
+
+:root {
+  --bg: #0c0e14;
+  --panel: #13151e;
+  --border: rgba(255,255,255,0.07);
+  --text: #cdd6f4;
+  --muted: #6c7086;
+  --accent: #89b4fa;
+  --green: #a6e3a1;
+  --yellow: #f9e2af;
+  --red: #f38ba8;
+  --mauve: #cba6f7;
+  --teal: #94e2d5;
+  --peach: #fab387;
+  --step-inactive: #1e2030;
+  --step-active: #1e2030;
+  --highlight: rgba(137,180,250,0.08);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 2rem 3rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: white;
+}
+
+.subtitle {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+.config-bar {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.config-item {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.config-item span {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ── MAIN LAYOUT ── */
+.layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 80px);
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  border-right: 1px solid var(--border);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
+}
+
+.step-btn {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: 1.4;
+}
+
+.step-btn:hover { color: var(--text); background: rgba(255,255,255,0.03); }
+
+.step-btn.active {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  background: var(--highlight);
+}
+
+.step-num {
+  font-size: 0.55rem;
+  opacity: 0.5;
+  min-width: 18px;
+}
+
+/* ── CONTENT ── */
+.content {
+  padding: 2rem 3rem;
+  max-width: 900px;
+}
+
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+/* ── STEP HEADER ── */
+.step-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.step-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.tag-embed  { background: rgba(137,180,250,0.15); color: var(--accent); }
+.tag-attn   { background: rgba(203,166,247,0.15); color: var(--mauve); }
+.tag-softmax{ background: rgba(166,227,161,0.15); color: var(--green); }
+.tag-ffn    { background: rgba(249,226,175,0.15); color: var(--yellow); }
+.tag-output { background: rgba(148,226,213,0.15); color: var(--teal); }
+.tag-norm   { background: rgba(250,179,135,0.15); color: var(--peach); }
+
+.step-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.3rem;
+}
+
+.step-desc {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+}
+
+/* ── EQUATION BLOCK ── */
+.eq-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.8rem;
+  line-height: 2.2;
+}
+
+.eq-title {
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.eq { color: var(--text); }
+.eq .sym  { color: var(--mauve); }
+.eq .num  { color: var(--green); }
+.eq .op   { color: var(--muted); }
+.eq .res  { color: var(--yellow); font-weight: 500; }
+.eq .fn   { color: var(--accent); }
+.eq .cmt  { color: #45475a; font-style: italic; }
+.eq .hi   { color: var(--teal); }
+
+/* ── MATRIX ── */
+.matrix-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.matrix-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.08em;
+}
+
+.matrix {
+  display: inline-grid;
+  gap: 2px;
+  border-left: 2px solid var(--muted);
+  border-right: 2px solid var(--muted);
+  padding: 4px 6px;
+  position: relative;
+}
+
+.matrix::before, .matrix::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 4px;
+  border-top: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+}
+.matrix::before { left: -2px; border-left: none; }
+.matrix::after { right: -2px; border-right: none; }
+
+.matrix-cell {
+  width: 52px; height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.cell-pos { background: rgba(166,227,161,0.12); color: var(--green); }
+.cell-neg { background: rgba(243,139,168,0.12); color: var(--red); }
+.cell-neu { background: rgba(255,255,255,0.04); color: var(--text); }
+.cell-hi  { background: rgba(137,180,250,0.2);  color: var(--accent); font-weight: 500; }
+.cell-res { background: rgba(249,226,175,0.15); color: var(--yellow); font-weight: 500; }
+
+.mat-op {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.2rem;
+  color: var(--muted);
+  padding: 0 0.25rem;
+}
+
+/* ── VECTOR ── */
+.vector {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 2px solid var(--muted);
+  border-right: 2px solid var(--muted);
+  padding: 4px 6px;
+}
+
+.vec-cell {
+  width: 64px; height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  border-radius: 2px;
+}
+
+/* ── HEATMAP ── */
+.heatmap-wrap { margin: 1rem 0; }
+
+.heatmap {
+  display: inline-grid;
+  gap: 3px;
+}
+
+.heat-cell {
+  width: 44px; height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  border-radius: 3px;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.heat-cell:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e2030;
+  color: var(--text);
+  padding: 0.3rem 0.5rem;
+  font-size: 0.6rem;
+  white-space: nowrap;
+  border: 1px solid var(--border);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.heat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+/* ── SOFTMAX BAR ── */
+.softmax-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.sbar-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 60px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sbar-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sbar-track {
+  height: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sbar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  white-space: nowrap;
+  min-width: 2px;
+}
+
+.sbar-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text);
+}
+
+/* ── TEMP SLIDER ── */
+.temp-control {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+
+.temp-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.temp-row label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--muted);
+  min-width: 120px;
+  letter-spacing: 0.06em;
+}
+
+input[type=range] { flex:1; accent-color: var(--accent); }
+
+.temp-out {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  min-width: 40px;
+}
+
+/* ── CALLOUT ── */
+.callout {
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1rem;
+  background: var(--highlight);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin: 1rem 0;
+  color: var(--text);
+}
+
+.callout.green { border-color: var(--green); background: rgba(166,227,161,0.05); }
+.callout.yellow { border-color: var(--yellow); background: rgba(249,226,175,0.05); }
+.callout.mauve { border-color: var(--mauve); background: rgba(203,166,247,0.05); }
+
+/* ── NAV BUTTONS ── */
+.nav-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.nav-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.nav-btn:hover, .nav-btn.primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+.nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.nav-btn:disabled:hover { background: none; color: var(--muted); border-color: var(--border); }
+
+/* Token chips */
+.token-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0.75rem 0;
+}
+
+.token {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--panel);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.token:hover, .token.selected {
+  border-color: var(--accent);
+  background: var(--highlight);
+  color: var(--accent);
+}
+
+.token-id {
+  font-size: 0.52rem;
+  color: var(--muted);
+}
+
+/* progress dots */
+.progress-dots {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.pdot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pdot.done { background: var(--muted); }
+.pdot.active { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Transformer Forward Pass</h1>
+    <p class="subtitle">Real numbers · Step by step · Tiny model (d=4, heads=2, vocab=8)</p>
+  </div>
+  <div class="config-bar">
+    <div class="config-item">d_model <span>4</span></div>
+    <div class="config-item">d_head <span>2</span></div>
+    <div class="config-item">n_heads <span>2</span></div>
+    <div class="config-item">seq_len <span>3</span></div>
+    <div class="config-item">vocab <span>8</span></div>
+    <div class="config-item">layers <span>1</span></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="step-btn active" onclick="goStep(0)"><span class="step-num">01</span>Tokenization</div>
+  <div class="step-btn" onclick="goStep(1)"><span class="step-num">02</span>Token Embedding</div>
+  <div class="step-btn" onclick="goStep(2)"><span class="step-num">03</span>Positional Encoding</div>
+  <div class="step-btn" onclick="goStep(3)"><span class="step-num">04</span>Q, K, V Projections</div>
+  <div class="step-btn" onclick="goStep(4)"><span class="step-num">05</span>Attention Scores</div>
+  <div class="step-btn" onclick="goStep(5)"><span class="step-num">06</span>Softmax & Weights</div>
+  <div class="step-btn" onclick="goStep(6)"><span class="step-num">07</span>Weighted Sum (Value)</div>
+  <div class="step-btn" onclick="goStep(7)"><span class="step-num">08</span>Feed-Forward Network</div>
+  <div class="step-btn" onclick="goStep(8)"><span class="step-num">09</span>Layer Norm</div>
+  <div class="step-btn" onclick="goStep(9)"><span class="step-num">10</span>Output & Softmax</div>
+</nav>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- ══ STEP 0: TOKENIZATION ══ -->
+<div class="step-panel active" id="panel-0">
+  <div class="step-header">
+    <div class="step-tag tag-embed">Input</div>
+    <div class="step-title">Step 1 — Tokenization</div>
+    <div class="step-desc">Raw text is split into tokens and mapped to integer IDs from a vocabulary. Our tiny model has a vocabulary of 8 tokens.</div>
+  </div>
+
+  <div class="callout">
+    <strong>Input sentence:</strong> <code style="color:var(--accent)">"the cat sat"</code><br>
+    Each word becomes a token ID by looking it up in the vocabulary table.
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Vocabulary lookup</div>
+    <div class="eq">
+      <span class="cmt">// vocabulary (simplified, real models have ~100k tokens)</span><br>
+      <span class="sym">vocab</span> <span class="op">=</span> { <span class="hi">"the"</span><span class="op">:</span><span class="num">0</span>, <span class="hi">"cat"</span><span class="op">:</span><span class="num">1</span>, <span class="hi">"sat"</span><span class="op">:</span><span class="num">2</span>, "on"<span class="op">:</span><span class="num">3</span>, "mat"<span class="op">:</span><span class="num">4</span>, ... }<br><br>
+      <span class="cmt">// "the cat sat" → token IDs</span><br>
+      <span class="sym">tokens</span> <span class="op">=</span> [<span class="res">0</span>, <span class="res">1</span>, <span class="res">2</span>]  <span class="cmt">// seq_len = 3</span>
+    </div>
+  </div>
+
+  <p style="margin-bottom:0.75rem;font-size:0.85rem;color:var(--muted)">Click any token to select it and trace it through all steps:</p>
+  <div class="token-row" id="token-row">
+    <div class="token selected" onclick="selectToken(0,this)">
+      <span>"the"</span><span class="token-id">id=0</span>
+    </div>
+    <div class="token" onclick="selectToken(1,this)">
+      <span>"cat"</span><span class="token-id">id=1</span>
+    </div>
+    <div class="token" onclick="selectToken(2,this)">
+      <span>"sat"</span><span class="token-id">id=2</span>
+    </div>
+  </div>
+
+  <div class="callout green" style="margin-top:1rem">
+    <strong>Real scale:</strong> Claude Sonnet processes sequences up to ~200,000 tokens. The vocabulary is ~100,000 subword tokens (using BPE — Byte Pair Encoding). "tokenization" itself becomes ["token", "ization"] — two tokens.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" disabled>← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(1)">Next: Embedding →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 1: EMBEDDING ══ -->
+<div class="step-panel" id="panel-1">
+  <div class="step-header">
+    <div class="step-tag tag-embed">Embedding</div>
+    <div class="step-title">Step 2 — Token Embedding</div>
+    <div class="step-desc">Each token ID is looked up in a learned embedding matrix E of shape [vocab_size × d_model]. Each token becomes a dense vector of floats.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Embedding lookup: E[token_id]</div>
+    <div class="eq">
+      <span class="sym">E</span> <span class="op">∈</span> ℝ<sup>vocab × d_model</sup> <span class="op">=</span> ℝ<sup><span class="num">8 × 4</span></sup>  <span class="cmt">// learned during training</span><br><br>
+      <span class="cmt">// Look up row for each token:</span><br>
+      <span class="hi">"the"</span> <span class="op">(id=0)</span> <span class="op">→</span> <span class="sym">E</span>[<span class="num">0</span>] <span class="op">=</span> <span class="res">[ 0.50, -0.30,  0.80,  0.10]</span><br>
+      <span class="hi">"cat"</span> <span class="op">(id=1)</span> <span class="op">→</span> <span class="sym">E</span>[<span class="num">1</span>] <span class="op">=</span> <span class="res">[-0.20,  0.70,  0.40, -0.60]</span><br>
+      <span class="hi">"sat"</span> <span class="op">(id=2)</span> <span class="op">→</span> <span class="sym">E</span>[<span class="num">2</span>] <span class="op">=</span> <span class="res">[ 0.30,  0.10, -0.50,  0.90]</span>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;margin-bottom:0.75rem;color:var(--muted)">Full embedding matrix E (8 vocab × 4 dimensions):</p>
+  <div class="matrix-wrap">
+    <div>
+      <div class="matrix-label">E [8 × 4]</div>
+      <div class="matrix" style="grid-template-columns:repeat(4,52px)">
+        <div class="matrix-cell cell-hi"> 0.50</div><div class="matrix-cell cell-neg">-0.30</div><div class="matrix-cell cell-pos"> 0.80</div><div class="matrix-cell cell-pos"> 0.10</div>
+        <div class="matrix-cell cell-neg">-0.20</div><div class="matrix-cell cell-pos"> 0.70</div><div class="matrix-cell cell-pos"> 0.40</div><div class="matrix-cell cell-neg">-0.60</div>
+        <div class="matrix-cell cell-pos"> 0.30</div><div class="matrix-cell cell-pos"> 0.10</div><div class="matrix-cell cell-neg">-0.50</div><div class="matrix-cell cell-pos"> 0.90</div>
+        <div class="matrix-cell cell-neg">-0.10</div><div class="matrix-cell cell-neg">-0.40</div><div class="matrix-cell cell-pos"> 0.60</div><div class="matrix-cell cell-neg">-0.20</div>
+        <div class="matrix-cell cell-pos"> 0.70</div><div class="matrix-cell cell-neg">-0.10</div><div class="matrix-cell cell-neg">-0.30</div><div class="matrix-cell cell-pos"> 0.50</div>
+        <div class="matrix-cell cell-neg">-0.50</div><div class="matrix-cell cell-pos"> 0.20</div><div class="matrix-cell cell-pos"> 0.80</div><div class="matrix-cell cell-neg">-0.40</div>
+        <div class="matrix-cell cell-pos"> 0.40</div><div class="matrix-cell cell-neg">-0.60</div><div class="matrix-cell cell-neg">-0.10</div><div class="matrix-cell cell-pos"> 0.70</div>
+        <div class="matrix-cell cell-neg">-0.30</div><div class="matrix-cell cell-pos"> 0.50</div><div class="matrix-cell cell-pos"> 0.20</div><div class="matrix-cell cell-neg">-0.80</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.4rem;align-self:center">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted)">← row 0 = "the"</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted)">← row 1 = "cat"</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted)">← row 2 = "sat"</div>
+    </div>
+  </div>
+
+  <div class="callout yellow">
+    <strong>Real scale:</strong> In Claude, d_model ≈ 8,192. Each token becomes an 8,192-dimensional vector. The embedding matrix E has 100,000 × 8,192 = <strong>819 million parameters</strong> — just for embeddings.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(0)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(2)">Next: Positional →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 2: POSITIONAL ENCODING ══ -->
+<div class="step-panel" id="panel-2">
+  <div class="step-header">
+    <div class="step-tag tag-embed">Positional</div>
+    <div class="step-title">Step 3 — Positional Encoding</div>
+    <div class="step-desc">Transformers process all tokens in parallel — so they have no inherent sense of order. Positional encodings are added to inject position information.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Sinusoidal positional encoding (original Transformer)</div>
+    <div class="eq">
+      <span class="sym">PE</span>(pos, 2i)   <span class="op">=</span> <span class="fn">sin</span>(pos <span class="op">/</span> 10000<sup>2i/d</sup>)<br>
+      <span class="sym">PE</span>(pos, 2i+1) <span class="op">=</span> <span class="fn">cos</span>(pos <span class="op">/</span> 10000<sup>2i/d</sup>)<br><br>
+      <span class="cmt">// For pos=0 ("the"), d=4, i=0,1:</span><br>
+      <span class="sym">PE</span>[<span class="num">0</span>] <span class="op">=</span> [<span class="fn">sin</span>(<span class="num">0</span>), <span class="fn">cos</span>(<span class="num">0</span>), <span class="fn">sin</span>(<span class="num">0</span>), <span class="fn">cos</span>(<span class="num">0</span>)] <span class="op">=</span> <span class="res">[ 0.00,  1.00,  0.00,  1.00]</span><br>
+      <span class="sym">PE</span>[<span class="num">1</span>] <span class="op">=</span> [<span class="fn">sin</span>(<span class="num">1</span>), <span class="fn">cos</span>(<span class="num">1</span>), <span class="fn">sin</span>(<span class="num">0.01</span>), <span class="fn">cos</span>(<span class="num">0.01</span>)] <span class="op">=</span> <span class="res">[ 0.84,  0.54,  0.01,  1.00]</span><br>
+      <span class="sym">PE</span>[<span class="num">2</span>] <span class="op">=</span> <span class="res">[ 0.91, -0.42,  0.02,  1.00]</span><br><br>
+      <span class="cmt">// Final input to transformer:</span><br>
+      <span class="sym">X</span> <span class="op">=</span> <span class="sym">E</span>[tokens] <span class="op">+</span> <span class="sym">PE</span>  <span class="cmt">// element-wise addition</span><br><br>
+      <span class="cmt">// "the" (pos 0):</span><br>
+      <span class="sym">X</span>[<span class="num">0</span>] <span class="op">=</span> [ 0.50, -0.30, 0.80, 0.10] <span class="op">+</span> [ 0.00, 1.00, 0.00, 1.00]<br>
+           <span class="op">=</span> <span class="res">[ 0.50,  0.70, 0.80, 1.10]</span>
+    </div>
+  </div>
+
+  <div class="callout mauve">
+    <strong>Modern models use RoPE</strong> (Rotary Position Embedding) instead — it encodes relative position by rotating Q and K vectors. Claude uses RoPE. The math is more complex but gives better results on long sequences.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(1)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(3)">Next: Q,K,V →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 3: QKV ══ -->
+<div class="step-panel" id="panel-3">
+  <div class="step-header">
+    <div class="step-tag tag-attn">Attention</div>
+    <div class="step-title">Step 4 — Q, K, V Projections</div>
+    <div class="step-desc">Each token's vector is projected three ways — into a Query, a Key, and a Value — using three separate learned weight matrices.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Linear projections (one attention head, d_head=2)</div>
+    <div class="eq">
+      <span class="sym">W_Q</span>, <span class="sym">W_K</span>, <span class="sym">W_V</span> <span class="op">∈</span> ℝ<sup><span class="num">d_model × d_head</span></sup> <span class="op">=</span> ℝ<sup><span class="num">4×2</span></sup><br><br>
+      <span class="sym">Q</span> <span class="op">=</span> <span class="sym">X</span> <span class="op">·</span> <span class="sym">W_Q</span>  <span class="cmt">// [3×4] · [4×2] = [3×2]</span><br>
+      <span class="sym">K</span> <span class="op">=</span> <span class="sym">X</span> <span class="op">·</span> <span class="sym">W_K</span>  <span class="cmt">// [3×4] · [4×2] = [3×2]</span><br>
+      <span class="sym">V</span> <span class="op">=</span> <span class="sym">X</span> <span class="op">·</span> <span class="sym">W_V</span>  <span class="cmt">// [3×4] · [4×2] = [3×2]</span>
+    </div>
+  </div>
+
+  <div class="matrix-wrap" style="align-items:flex-start">
+    <div>
+      <div class="matrix-label">X [3×4]</div>
+      <div class="matrix" style="grid-template-columns:repeat(4,52px)">
+        <div class="matrix-cell cell-pos"> 0.50</div><div class="matrix-cell cell-pos"> 0.70</div><div class="matrix-cell cell-pos"> 0.80</div><div class="matrix-cell cell-pos"> 1.10</div>
+        <div class="matrix-cell cell-pos"> 0.64</div><div class="matrix-cell cell-pos"> 1.24</div><div class="matrix-cell cell-pos"> 0.41</div><div class="matrix-cell cell-neg">-0.60</div> 
+        <div class="matrix-cell cell-pos"> 1.21</div><div class="matrix-cell cell-neg">-0.32</div><div class="matrix-cell cell-neg">-0.48</div><div class="matrix-cell cell-pos"> 1.90</div>
+      </div>
+    </div>
+    <div class="mat-op">·</div>
+    <div>
+      <div class="matrix-label">W_Q [4×2]</div>
+      <div class="matrix" style="grid-template-columns:repeat(2,52px)">
+        <div class="matrix-cell cell-pos"> 0.40</div><div class="matrix-cell cell-neg">-0.20</div>
+        <div class="matrix-cell cell-pos"> 0.30</div><div class="matrix-cell cell-pos"> 0.50</div>
+        <div class="matrix-cell cell-neg">-0.10</div><div class="matrix-cell cell-pos"> 0.60</div>
+        <div class="matrix-cell cell-pos"> 0.20</div><div class="matrix-cell cell-neg">-0.30</div>
+      </div>
+    </div>
+    <div class="mat-op">=</div>
+    <div>
+      <div class="matrix-label">Q [3×2]</div>
+      <div class="matrix" style="grid-template-columns:repeat(2,52px)">
+        <div class="matrix-cell cell-res"> 0.56</div><div class="matrix-cell cell-res"> 0.70</div>
+        <div class="matrix-cell cell-res"> 0.56</div><div class="matrix-cell cell-res"> 0.38</div>
+        <div class="matrix-cell cell-res"> 0.29</div><div class="matrix-cell cell-res"> 0.10</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="eq-block" style="margin-top:1rem">
+    <div class="eq-title">What Q, K, V mean intuitively</div>
+    <div class="eq">
+      <span class="sym">Q</span> (Query)  <span class="op">→</span>  <span class="cmt">// "What am I looking for?"</span><br>
+      <span class="sym">K</span> (Key)    <span class="op">→</span>  <span class="cmt">// "What do I contain / advertise?"</span><br>
+      <span class="sym">V</span> (Value)  <span class="op">→</span>  <span class="cmt">// "What information do I contribute?"</span><br><br>
+      <span class="cmt">// Each token asks its Q against every other token's K</span><br>
+      <span class="cmt">// High Q·K score = "this token is relevant to me"</span><br>
+      <span class="cmt">// Then it collects those tokens' V proportionally</span>
+    </div>
+  </div>
+
+  <div class="callout yellow">
+    <strong>Real scale:</strong> d_head = 128 typically. With 64 heads, each layer has 3 × (8192 × 128) × 64 = <strong>~201M parameters</strong> just in Q,K,V projection matrices per layer.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(2)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(4)">Next: Scores →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 4: ATTENTION SCORES ══ -->
+<div class="step-panel" id="panel-4">
+  <div class="step-header">
+    <div class="step-tag tag-attn">Attention</div>
+    <div class="step-title">Step 5 — Attention Scores</div>
+    <div class="step-desc">Every token's Query is dot-producted with every token's Key to produce a score matrix. Scaled by √d_head to prevent vanishing gradients.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Scaled dot-product attention scores</div>
+    <div class="eq">
+      <span class="sym">scores</span> <span class="op">=</span> <span class="sym">Q</span> <span class="op">·</span> <span class="sym">K</span><sup>T</sup> <span class="op">/</span> <span class="fn">√</span>d_head<br><br>
+      <span class="cmt">// Q: [3×2], K^T: [2×3] → scores: [3×3]</span><br>
+      <span class="cmt">// scaling: √2 ≈ 1.414</span><br><br>
+      <span class="cmt">// scores[0][0] = Q[0]·K[0] / √2</span><br>
+      <span class="op">=</span> (<span class="num">0.56</span><span class="op">×</span><span class="num">0.42</span> <span class="op">+</span> <span class="num">0.70</span><span class="op">×</span><span class="num">0.31</span>) <span class="op">/</span> <span class="num">1.414</span><br>
+      <span class="op">=</span> (<span class="num">0.235</span> <span class="op">+</span> <span class="num">0.217</span>) <span class="op">/</span> <span class="num">1.414</span><br>
+      <span class="op">=</span> <span class="num">0.452</span> <span class="op">/</span> <span class="num">1.414</span> <span class="op">=</span> <span class="res">0.320</span>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem">Attention score matrix — hover cells for details:</p>
+  <div class="heatmap-wrap">
+    <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:.4rem">
+      <div style="width:44px"></div>
+      <div class="heat-label" style="width:44px;text-align:center">K:"the"</div>
+      <div class="heat-label" style="width:44px;text-align:center">K:"cat"</div>
+      <div class="heat-label" style="width:44px;text-align:center">K:"sat"</div>
+    </div>
+    <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:3px">
+      <div class="heat-label" style="width:44px;text-align:right">Q:"the"</div>
+      <div id="hm" class="heatmap" style="grid-template-columns:repeat(3,44px)"></div>
+    </div>
+    <div style="display:flex;gap:.6rem;margin-top:.2rem">
+      <div style="width:44px"></div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.55rem;color:var(--muted)">← columns = Keys attended to</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Why scale by √d_head?</strong> Dot products grow in magnitude as dimension increases. Without scaling, softmax receives very large inputs, causing it to saturate (output nearly one-hot distributions), which gives near-zero gradients during training.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(3)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(5)">Next: Softmax →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 5: SOFTMAX ══ -->
+<div class="step-panel" id="panel-5">
+  <div class="step-header">
+    <div class="step-tag tag-softmax">Softmax</div>
+    <div class="step-title">Step 6 — Softmax & Attention Weights</div>
+    <div class="step-desc">Softmax converts raw scores into probabilities that sum to 1. These become the attention weights — how much each token "attends to" every other token.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Softmax formula</div>
+    <div class="eq">
+      <span class="fn">softmax</span>(z<sub>i</sub>) <span class="op">=</span> e<sup>z<sub>i</sub></sup> <span class="op">/</span> Σ<sub>j</sub> e<sup>z<sub>j</sub></sup><br><br>
+      <span class="cmt">// Row 0 of scores ("the" attending to all tokens):</span><br>
+      <span class="sym">z</span> <span class="op">=</span> [<span class="num">0.320</span>, <span class="num">0.518</span>, <span class="num">0.124</span>]<br><br>
+      <span class="cmt">// Exponentiate each:</span><br>
+      e<sup><span class="num">0.320</span></sup> <span class="op">=</span> <span class="num">1.377</span>,  e<sup><span class="num">0.518</span></sup> <span class="op">=</span> <span class="num">1.679</span>,  e<sup><span class="num">0.124</span></sup> <span class="op">=</span> <span class="num">1.132</span><br><br>
+      <span class="cmt">// Sum:</span><br>
+      Σ <span class="op">=</span> <span class="num">1.377</span> <span class="op">+</span> <span class="num">1.679</span> <span class="op">+</span> <span class="num">1.132</span> <span class="op">=</span> <span class="num">4.188</span><br><br>
+      <span class="cmt">// Normalize:</span><br>
+      <span class="sym">attn</span>[<span class="num">0</span>] <span class="op">=</span> [<span class="res">0.329</span>, <span class="res">0.401</span>, <span class="res">0.270</span>]  <span class="cmt">// sums to 1.000 ✓</span>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem">Attention weights for token "the" (row 0). Adjust temperature to see how it affects sharpness:</p>
+  <div class="temp-control">
+    <div class="temp-row" style="margin-bottom:.5rem">
+      <label>Temperature (τ)</label>
+      <input type="range" min="0.1" max="3" step="0.1" value="1.0" oninput="updateTemp(this.value)">
+      <span class="temp-out" id="temp-val">1.0</span>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);margin-bottom:.6rem" id="temp-note">τ=1.0: normal distribution</div>
+  </div>
+  <div class="softmax-bars" id="softmax-bars"></div>
+
+  <div class="callout green">
+    <strong>Temperature explained:</strong> At τ→0, the highest score gets all the weight (argmax). At τ→∞, all tokens get equal weight (uniform). Real sampling temperature works exactly this way — it's applied to the final output softmax to control how "creative" vs "deterministic" the model is.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(4)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(6)">Next: Value sum →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 6: VALUE SUM ══ -->
+<div class="step-panel" id="panel-6">
+  <div class="step-header">
+    <div class="step-tag tag-attn">Attention</div>
+    <div class="step-title">Step 7 — Weighted Value Sum</div>
+    <div class="step-desc">The attention weights are used to take a weighted average of all Value vectors. This is the output of one attention head.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Attention output = softmax(QK^T/√d) · V</div>
+    <div class="eq">
+      <span class="sym">output</span>[<span class="num">0</span>] <span class="op">=</span> <span class="num">0.329</span> <span class="op">×</span> <span class="sym">V</span>[<span class="num">0</span>] <span class="op">+</span> <span class="num">0.401</span> <span class="op">×</span> <span class="sym">V</span>[<span class="num">1</span>] <span class="op">+</span> <span class="num">0.270</span> <span class="op">×</span> <span class="sym">V</span>[<span class="num">2</span>]<br><br>
+      <span class="cmt">// V vectors (from V = X · W_V):</span><br>
+      <span class="sym">V</span>[<span class="num">0</span>] <span class="op">=</span> [<span class="num"> 0.44</span>, <span class="num"> 0.28</span>]  <span class="cmt">// "the"</span><br>
+      <span class="sym">V</span>[<span class="num">1</span>] <span class="op">=</span> [<span class="num">-0.12</span>, <span class="num"> 0.63</span>]  <span class="cmt">// "cat"</span><br>
+      <span class="sym">V</span>[<span class="num">2</span>] <span class="op">=</span> [<span class="num"> 0.81</span>, <span class="num">-0.19</span>]  <span class="cmt">// "sat"</span><br><br>
+      <span class="op">=</span> <span class="num">0.329</span><span class="op">×</span>[<span class="num"> 0.44</span>, <span class="num"> 0.28</span>]<br>
+      <span class="op">+</span> <span class="num">0.401</span><span class="op">×</span>[<span class="num">-0.12</span>, <span class="num"> 0.63</span>]<br>
+      <span class="op">+</span> <span class="num">0.270</span><span class="op">×</span>[<span class="num"> 0.81</span>, <span class="num">-0.19</span>]<br><br>
+      <span class="op">=</span> [<span class="num"> 0.145</span>, <span class="num"> 0.092</span>]<br>
+      <span class="op">+</span> [<span class="num">-0.048</span>, <span class="num"> 0.253</span>]<br>
+      <span class="op">+</span> [<span class="num"> 0.219</span>, <span class="num">-0.051</span>]<br><br>
+      <span class="op">=</span> <span class="res">[0.316, 0.294]</span>  <span class="cmt">// head output for "the"</span>
+    </div>
+  </div>
+
+  <div class="callout mauve">
+    <strong>Multi-head attention:</strong> This happens in parallel across all heads. Each head has different W_Q, W_K, W_V matrices so learns different patterns. The outputs are concatenated then projected: <code>concat(head_1,...,head_h) · W_O</code>. With 2 heads and d_head=2, the concat is [3×4], projected back to [3×4] = d_model.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(5)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(7)">Next: FFN →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 7: FFN ══ -->
+<div class="step-panel" id="panel-7">
+  <div class="step-header">
+    <div class="step-tag tag-ffn">Feed-Forward</div>
+    <div class="step-title">Step 8 — Feed-Forward Network</div>
+    <div class="step-desc">After attention, each token's vector passes through a 2-layer MLP independently. This is where most of the model's "knowledge" is thought to live.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Position-wise FFN (applied to each token independently)</div>
+    <div class="eq">
+      <span class="sym">FFN</span>(x) <span class="op">=</span> <span class="fn">GELU</span>(<span class="sym">x</span> <span class="op">·</span> <span class="sym">W₁</span> <span class="op">+</span> b₁) <span class="op">·</span> <span class="sym">W₂</span> <span class="op">+</span> b₂<br><br>
+      <span class="sym">W₁</span> <span class="op">∈</span> ℝ<sup><span class="num">d_model × d_ff</span></sup> <span class="op">=</span> ℝ<sup><span class="num">4 × 8</span></sup>  <span class="cmt">// d_ff = 4 × d_model typically</span><br>
+      <span class="sym">W₂</span> <span class="op">∈</span> ℝ<sup><span class="num">d_ff × d_model</span></sup> <span class="op">=</span> ℝ<sup><span class="num">8 × 4</span></sup><br><br>
+      <span class="cmt">// GELU activation (smoother than ReLU):</span><br>
+      <span class="fn">GELU</span>(x) <span class="op">≈</span> x <span class="op">·</span> <span class="fn">Φ</span>(x)  <span class="cmt">// Φ = standard normal CDF</span><br>
+      <span class="fn">GELU</span>(<span class="num">1.0</span>) <span class="op">≈</span> <span class="res">0.841</span><br>
+      <span class="fn">GELU</span>(<span class="num">-1.0</span>) <span class="op">≈</span> <span class="res">-0.159</span>  <span class="cmt">// small but non-zero (unlike ReLU)</span><br>
+      <span class="fn">GELU</span>(<span class="num">0.0</span>) <span class="op">=</span> <span class="res">0.000</span>
+    </div>
+  </div>
+
+  <div id="gelu-viz" style="margin:1rem 0">
+    <p style="font-family:'IBM Plex Mono',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem">GELU vs ReLU comparison</p>
+    <canvas id="gelu-canvas" width="400" height="160" style="border:1px solid var(--border);background:var(--panel)"></canvas>
+  </div>
+
+  <div class="callout yellow">
+    <strong>Real scale:</strong> d_ff = 4 × d_model = 32,768 in large models. The FFN has 2 × (8192 × 32768) = <strong>~537M parameters per layer</strong>. With 60 layers, FFN params alone ≈ 32 billion. This is where "facts" are believed to be stored as key-value memories.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(6)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(8)">Next: LayerNorm →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 8: LAYER NORM ══ -->
+<div class="step-panel" id="panel-8">
+  <div class="step-header">
+    <div class="step-tag tag-norm">Normalization</div>
+    <div class="step-title">Step 9 — Layer Normalization</div>
+    <div class="step-desc">After each sub-layer (attention and FFN), the vector is normalized to have zero mean and unit variance, then scaled by learned parameters γ and β.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">LayerNorm formula</div>
+    <div class="eq">
+      <span class="fn">LayerNorm</span>(x) <span class="op">=</span> γ <span class="op">×</span> (x <span class="op">-</span> μ) <span class="op">/</span> <span class="fn">√</span>(σ² <span class="op">+</span> ε) <span class="op">+</span> β<br><br>
+      <span class="cmt">// Example: x = [0.316, 0.294, -0.12, 0.88] after FFN</span><br>
+      <span class="sym">μ</span>  <span class="op">=</span> (<span class="num">0.316</span> <span class="op">+</span> <span class="num">0.294</span> <span class="op">+</span> (<span class="num">-0.12</span>) <span class="op">+</span> <span class="num">0.88</span>) <span class="op">/</span> <span class="num">4</span>  <span class="op">=</span> <span class="res">0.343</span><br>
+      <span class="sym">σ²</span> <span class="op">=</span> mean of (x <span class="op">-</span> μ)²  <span class="op">=</span> <span class="res">0.118</span><br>
+      <span class="sym">σ</span>  <span class="op">=</span> <span class="fn">√</span><span class="num">0.118</span>  <span class="op">=</span> <span class="res">0.344</span><br>
+      <span class="sym">ε</span>  <span class="op">=</span> <span class="num">1e-5</span>  <span class="cmt">// numerical stability</span><br><br>
+      <span class="cmt">// Normalize (before γ, β):</span><br>
+      x̂ <span class="op">=</span> (<span class="num">0.316</span> <span class="op">-</span> <span class="num">0.343</span>) <span class="op">/</span> <span class="num">0.344</span> <span class="op">=</span> <span class="res">-0.079</span>  <span class="cmt">// first element</span><br><br>
+      <span class="cmt">// γ, β are learned (initialized to 1, 0)</span><br>
+      <span class="cmt">// Also: residual connection x = x + sublayer(x)</span>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <strong>Residual connections</strong> are equally important — every sub-layer adds its output to its input: <code>x = x + LayerNorm(Attention(x))</code>. This lets gradients flow directly from output to early layers during training, solving the vanishing gradient problem and enabling very deep networks (60+ layers).
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(7)">← Previous</button>
+    <button class="nav-btn primary" onclick="goStep(9)">Next: Output →</button>
+  </div>
+</div>
+
+<!-- ══ STEP 9: OUTPUT ══ -->
+<div class="step-panel" id="panel-9">
+  <div class="step-header">
+    <div class="step-tag tag-output">Output</div>
+    <div class="step-title">Step 10 — Output Projection & Final Softmax</div>
+    <div class="step-desc">The final token vector is projected to vocabulary size, then softmax produces a probability distribution over all possible next tokens.</div>
+  </div>
+
+  <div class="eq-block">
+    <div class="eq-title">Logits and final softmax</div>
+    <div class="eq">
+      <span class="cmt">// Unembedding: project d_model → vocab_size</span><br>
+      <span class="sym">logits</span> <span class="op">=</span> <span class="sym">h</span> <span class="op">·</span> <span class="sym">W_U</span>   <span class="cmt">// [1×4] · [4×8] = [1×8]</span><br><br>
+      <span class="cmt">// Raw logits for our 8-token vocab:</span><br>
+      <span class="sym">logits</span> <span class="op">=</span> [<span class="num">2.1</span>, <span class="num">0.8</span>, <span class="num">1.5</span>, <span class="num">3.2</span>, <span class="num">0.3</span>, <span class="num">-0.5</span>, <span class="num">1.1</span>, <span class="num">0.7</span>]<br><br>
+      <span class="cmt">// Apply softmax → probabilities:</span><br>
+      <span class="sym">probs</span>  <span class="op">=</span> <span class="fn">softmax</span>(<span class="sym">logits</span>)
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem;color:var(--muted);margin-bottom:0.6rem">Output probability distribution over next token. Adjust temperature:</p>
+  <div class="temp-control">
+    <div class="temp-row">
+      <label>Temperature (τ)</label>
+      <input type="range" min="0.1" max="3" step="0.1" value="1.0" oninput="updateOutputTemp(this.value)">
+      <span class="temp-out" id="out-temp-val">1.0</span>
+    </div>
+  </div>
+  <div class="softmax-bars" id="output-bars" style="margin-top:0.75rem"></div>
+
+  <div class="callout">
+    <strong>Token sampling:</strong> The model doesn't always pick the highest probability token (greedy). Techniques like <em>top-p sampling</em> (nucleus sampling) pick from the smallest set of tokens whose cumulative probability exceeds p (e.g. 0.9). This produces more varied, natural outputs than always choosing the argmax.
+  </div>
+
+  <div class="callout mauve" style="margin-top:0.75rem">
+    <strong>This completes one forward pass</strong> — producing one token. For a 100-token response, this entire pipeline runs 100 times. At real scale (billions of params, 200k context), each forward pass involves ~10<sup>15</sup> floating point operations.
+  </div>
+
+  <div class="nav-row">
+    <button class="nav-btn" onclick="goStep(8)">← Previous</button>
+    <button class="nav-btn" onclick="goStep(0)" style="margin-left:auto">↺ Start Over</button>
+  </div>
+</div>
+
+</div><!-- /content -->
+</div><!-- /layout -->
+
+<script>
+let currentStep = 0;
+
+function goStep(n) {
+  // Deactivate old
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  // Activate new
+  document.getElementById('panel-' + n).classList.add('active');
+  document.querySelectorAll('.step-btn')[n].classList.add('active');
+  currentStep = n;
+  window.scrollTo(0, 0);
+  // Trigger animations for relevant steps
+  if (n === 5) initSoftmax();
+  if (n === 4) initHeatmap();
+  if (n === 7) drawGELU();
+  if (n === 9) initOutputBars();
+}
+
+// ── TOKEN SELECTION ──
+let selectedToken = 0;
+function selectToken(id, el) {
+  selectedToken = id;
+  document.querySelectorAll('.token').forEach(t => t.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ── HEATMAP ──
+const scores = [
+  [0.320, 0.518, 0.124],
+  [0.241, 0.610, 0.380],
+  [0.190, 0.430, 0.520],
+];
+const tokenLabels = ['"the"', '"cat"', '"sat"'];
+
+function initHeatmap() {
+  const hm = document.getElementById('hm');
+  if (!hm) return;
+  hm.innerHTML = '';
+
+  const flat = scores.flat();
+  const min = Math.min(...flat), max = Math.max(...flat);
+
+  scores.forEach((row, i) => {
+    row.forEach((val, j) => {
+      const cell = document.createElement('div');
+      cell.className = 'heat-cell';
+      const t = (val - min) / (max - min);
+      const r = Math.round(30 + t * 100);
+      const g = Math.round(30 + t * 160);
+      const b = Math.round(80 + t * 120);
+      cell.style.background = `rgba(${r},${g},${b},${0.3 + t*0.6})`;
+      cell.style.color = t > 0.5 ? '#cdd6f4' : '#6c7086';
+      cell.textContent = val.toFixed(3);
+      cell.setAttribute('data-tip', `Q:${tokenLabels[i]} → K:${tokenLabels[j]} = ${val.toFixed(3)}`);
+      hm.appendChild(cell);
+    });
+  });
+
+  // Row labels
+  const container = hm.parentElement;
+  const labels = document.createElement('div');
+}
+
+// ── SOFTMAX ──
+const rawScores = [0.320, 0.518, 0.124];
+
+function softmax(arr, temp) {
+  const scaled = arr.map(x => x / temp);
+  const maxVal = Math.max(...scaled);
+  const exps = scaled.map(x => Math.exp(x - maxVal));
+  const sum = exps.reduce((a,b) => a+b, 0);
+  return exps.map(x => x/sum);
+}
+
+function initSoftmax() {
+  updateTemp(1.0);
+}
+
+function updateTemp(t) {
+  const temp = parseFloat(t);
+  document.getElementById('temp-val').textContent = temp.toFixed(1);
+  const note = document.getElementById('temp-note');
+  if (temp < 0.5) note.textContent = 'τ<0.5: very sharp, near-deterministic';
+  else if (temp < 0.9) note.textContent = 'τ<1.0: sharper than normal';
+  else if (temp < 1.1) note.textContent = 'τ=1.0: standard distribution';
+  else if (temp < 2.0) note.textContent = 'τ>1.0: flatter, more random';
+  else note.textContent = 'τ>>1: nearly uniform, very random';
+
+  const probs = softmax(rawScores, temp);
+  const colors = ['#89b4fa','#cba6f7','#94e2d5'];
+  const bars = document.getElementById('softmax-bars');
+  bars.innerHTML = '';
+
+  tokenLabels.forEach((label, i) => {
+    const row = document.createElement('div');
+    row.className = 'sbar-row';
+    row.innerHTML = `
+      <div class="sbar-label">${label}</div>
+      <div class="sbar-track">
+        <div class="sbar-fill" style="width:0%;background:${colors[i]}22;color:${colors[i]}"></div>
+      </div>
+      <div class="sbar-val">${probs[i].toFixed(3)}</div>
+    `;
+    bars.appendChild(row);
+    setTimeout(() => {
+      row.querySelector('.sbar-fill').style.width = (probs[i]*100) + '%';
+    }, 50);
+  });
+}
+
+// ── OUTPUT BARS ──
+const outputLogits = [2.1, 0.8, 1.5, 3.2, 0.3, -0.5, 1.1, 0.7];
+const outputTokens = ['"the"','"cat"','"sat"','"on"','"mat"','"a"','"big"','"small"'];
+const outColors = ['#89b4fa','#cba6f7','#94e2d5','#f9e2af','#f38ba8','#fab387','#a6e3a1','#cdd6f4'];
+
+function initOutputBars() {
+  updateOutputTemp(1.0);
+}
+
+function updateOutputTemp(t) {
+  const temp = parseFloat(t);
+  document.getElementById('out-temp-val').textContent = temp.toFixed(1);
+  const probs = softmax(outputLogits, temp);
+  const bars = document.getElementById('output-bars');
+  bars.innerHTML = '';
+
+  outputTokens.forEach((label, i) => {
+    const row = document.createElement('div');
+    row.className = 'sbar-row';
+    row.innerHTML = `
+      <div class="sbar-label">${label}</div>
+      <div class="sbar-track">
+        <div class="sbar-fill" style="width:0%;background:${outColors[i]}22;color:${outColors[i]}"></div>
+      </div>
+      <div class="sbar-val">${(probs[i]*100).toFixed(1)}%</div>
+    `;
+    bars.appendChild(row);
+    setTimeout(() => {
+      row.querySelector('.sbar-fill').style.width = (probs[i]*100) + '%';
+    }, 50);
+  });
+}
+
+// ── GELU CANVAS ──
+function drawGELU() {
+  const c = document.getElementById('gelu-canvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  const pad = 30;
+
+  ctx.fillStyle = '#13151e';
+  ctx.fillRect(0,0,W,H);
+
+  // Axes
+  const cx = W/2, cy = H/2;
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad,cy); ctx.lineTo(W-pad,cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,pad); ctx.lineTo(cx,H-pad); ctx.stroke();
+
+  // Axis labels
+  ctx.fillStyle = '#6c7086';
+  ctx.font = '10px IBM Plex Mono';
+  ctx.textAlign = 'center';
+  [-2,-1,1,2].forEach(v => {
+    const x = cx + v*(W-2*pad)/6;
+    ctx.fillText(v, x, cy+14);
+  });
+
+  function toCanvas(x, y) {
+    return {
+      cx: cx + x*(W-2*pad)/6,
+      cy: cy - y*(H-2*pad)/4
+    };
+  }
+
+  // ReLU
+  ctx.beginPath();
+  ctx.strokeStyle = '#f38ba8';
+  ctx.lineWidth = 2;
+  for (let px = pad; px < W-pad; px++) {
+    const x = (px - cx) / ((W-2*pad)/6);
+    const y = Math.max(0, x);
+    const p = toCanvas(x, y);
+    px === pad ? ctx.moveTo(p.cx, p.cy) : ctx.lineTo(p.cx, p.cy);
+  }
+  ctx.stroke();
+
+  // GELU
+  ctx.beginPath();
+  ctx.strokeStyle = '#89b4fa';
+  ctx.lineWidth = 2.5;
+  for (let px = pad; px < W-pad; px++) {
+    const x = (px - cx) / ((W-2*pad)/6);
+    const y = x * 0.5 * (1 + Math.tanh(Math.sqrt(2/Math.PI) * (x + 0.044715 * x*x*x)));
+    const p = toCanvas(x, y);
+    px === pad ? ctx.moveTo(p.cx, p.cy) : ctx.lineTo(p.cx, p.cy);
+  }
+  ctx.stroke();
+
+  // Legend
+  ctx.font = '11px IBM Plex Mono';
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#89b4fa';
+  ctx.fillText('GELU', W-80, 20);
+  ctx.fillStyle = '#f38ba8';
+  ctx.fillText('ReLU', W-80, 36);
+}
+
+// init first step
+initHeatmap();
+</script>
+</body>
+</html>
