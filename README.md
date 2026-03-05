@@ -16,4 +16,4 @@ This repository strictly contains results and outputs from AI. I prompted AI mod
 
 ### Gemini 3
 
-#### [Self-Audit according to NIST SP 800-53 Revision 5](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/Google/Gemini%203)
+#### [Gemini 3 auditing itself according to NIST SP 800-53 Revision 5](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/Google/Gemini%203)
