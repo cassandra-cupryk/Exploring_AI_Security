@@ -1,0 +1,1501 @@
+Control_ID,Family_Name,Assessment_Status,Justification_Notes
+AC-1,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-1(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-1(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-2,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-2(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-2(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-3,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-3(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-3(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-4,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-4(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-4(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-5,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-5(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-5(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-6,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-6(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-6(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-7,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-7(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-7(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-8,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-8(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-8(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-9,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-9(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-9(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-10,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-10(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-10(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-11,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-11(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-11(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-12,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-12(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-12(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-13,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-13(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-13(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-14,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-14(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-14(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-15,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-15(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-15(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-16,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-16(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-16(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-17,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-17(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-17(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-18,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-18(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-18(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-19,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-19(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-19(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-20,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-20(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-20(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-21,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-21(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-21(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-22,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-22(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-22(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-23,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-23(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-23(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-24,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-24(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-24(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-25,Access Control,Shared,Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-25(1),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AC-25(2),Access Control Enhancement,Shared,Enhancement requirement: Inherited IAM from Google Cloud; App-level RBAC implemented.
+AT-1,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-1(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-1(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-2,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-2(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-2(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-3,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-3(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-3(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-4,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-4(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-4(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-5,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-5(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-5(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-6,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-6(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-6(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-7,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-7(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-7(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-8,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-8(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-8(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-9,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-9(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-9(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-10,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-10(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-10(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-11,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-11(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-11(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-12,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-12(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-12(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-13,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-13(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-13(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-14,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-14(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-14(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-15,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-15(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-15(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-16,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-16(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-16(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-17,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-17(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-17(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-18,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-18(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-18(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-19,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-19(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-19(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-20,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-20(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-20(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-21,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-21(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-21(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-22,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-22(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-22(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-23,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-23(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-23(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-24,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-24(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-24(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-25,Awareness and Training,Pass,Mandatory security/privacy training for all developers.
+AT-25(1),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AT-25(2),Awareness and Training Enhancement,Pass,Enhancement requirement: Mandatory security/privacy training for all developers.
+AU-1,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-1(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-1(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-2,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-2(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-2(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-3,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-3(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-3(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-4,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-4(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-4(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-5,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-5(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-5(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-6,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-6(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-6(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-7,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-7(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-7(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-8,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-8(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-8(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-9,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-9(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-9(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-10,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-10(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-10(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-11,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-11(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-11(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-12,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-12(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-12(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-13,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-13(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-13(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-14,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-14(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-14(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-15,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-15(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-15(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-16,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-16(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-16(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-17,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-17(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-17(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-18,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-18(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-18(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-19,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-19(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-19(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-20,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-20(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-20(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-21,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-21(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-21(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-22,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-22(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-22(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-23,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-23(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-23(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-24,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-24(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-24(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-25,Audit and Accountability,Pass,Full logging of API calls and model parameter changes.
+AU-25(1),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+AU-25(2),Audit and Accountability Enhancement,Pass,Enhancement requirement: Full logging of API calls and model parameter changes.
+CA-1,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-1(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-1(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-2,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-2(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-2(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-3,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-3(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-3(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-4,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-4(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-4(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-5,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-5(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-5(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-6,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-6(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-6(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-7,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-7(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-7(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-8,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-8(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-8(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-9,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-9(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-9(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-10,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-10(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-10(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-11,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-11(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-11(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-12,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-12(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-12(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-13,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-13(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-13(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-14,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-14(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-14(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-15,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-15(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-15(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-16,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-16(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-16(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-17,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-17(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-17(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-18,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-18(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-18(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-19,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-19(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-19(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-20,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-20(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-20(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-21,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-21(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-21(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-22,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-22(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-22(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-23,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-23(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-23(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-24,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-24(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-24(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-25,"Assessment, Auth, and Monitoring",Pass,Regular 3rd party audits (FedRAMP/SOC2).
+CA-25(1),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CA-25(2),"Assessment, Auth, and Monitoring Enhancement",Pass,Enhancement requirement: Regular 3rd party audits (FedRAMP/SOC2).
+CM-1,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-1(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-1(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-2,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-2(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-2(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-3,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-3(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-3(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-4,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-4(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-4(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-5,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-5(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-5(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-6,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-6(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-6(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-7,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-7(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-7(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-8,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-8(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-8(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-9,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-9(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-9(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-10,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-10(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-10(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-11,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-11(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-11(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-12,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-12(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-12(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-13,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-13(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-13(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-14,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-14(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-14(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-15,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-15(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-15(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-16,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-16(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-16(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-17,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-17(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-17(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-18,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-18(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-18(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-19,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-19(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-19(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-20,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-20(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-20(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-21,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-21(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-21(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-22,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-22(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-22(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-23,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-23(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-23(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-24,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-24(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-24(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-25,Configuration Management,Pass,Strict versioning of model weights and architecture.
+CM-25(1),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CM-25(2),Configuration Management Enhancement,Pass,Enhancement requirement: Strict versioning of model weights and architecture.
+CP-1,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-1(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-1(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-2,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-2(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-2(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-3,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-3(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-3(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-4,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-4(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-4(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-5,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-5(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-5(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-6,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-6(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-6(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-7,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-7(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-7(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-8,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-8(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-8(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-9,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-9(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-9(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-10,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-10(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-10(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-11,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-11(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-11(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-12,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-12(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-12(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-13,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-13(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-13(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-14,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-14(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-14(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-15,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-15(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-15(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-16,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-16(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-16(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-17,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-17(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-17(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-18,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-18(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-18(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-19,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-19(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-19(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-20,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-20(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-20(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-21,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-21(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-21(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-22,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-22(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-22(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-23,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-23(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-23(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-24,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-24(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-24(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-25,Contingency Planning,Pass,Regional failover and high-availability architecture.
+CP-25(1),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+CP-25(2),Contingency Planning Enhancement,Pass,Enhancement requirement: Regional failover and high-availability architecture.
+IA-1,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-1(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-1(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-2,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-2(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-2(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-3,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-3(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-3(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-4,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-4(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-4(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-5,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-5(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-5(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-6,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-6(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-6(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-7,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-7(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-7(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-8,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-8(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-8(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-9,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-9(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-9(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-10,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-10(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-10(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-11,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-11(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-11(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-12,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-12(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-12(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-13,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-13(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-13(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-14,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-14(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-14(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-15,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-15(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-15(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-16,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-16(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-16(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-17,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-17(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-17(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-18,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-18(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-18(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-19,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-19(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-19(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-20,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-20(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-20(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-21,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-21(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-21(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-22,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-22(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-22(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-23,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-23(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-23(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-24,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-24(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-24(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-25,Identification and Authentication,Shared,MFA and FIPS-validated auth via Cloud identity services.
+IA-25(1),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IA-25(2),Identification and Authentication Enhancement,Shared,Enhancement requirement: MFA and FIPS-validated auth via Cloud identity services.
+IR-1,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-1(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-1(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-2,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-2(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-2(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-3,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-3(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-3(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-4,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-4(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-4(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-5,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-5(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-5(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-6,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-6(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-6(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-7,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-7(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-7(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-8,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-8(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-8(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-9,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-9(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-9(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-10,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-10(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-10(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-11,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-11(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-11(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-12,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-12(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-12(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-13,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-13(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-13(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-14,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-14(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-14(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-15,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-15(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-15(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-16,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-16(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-16(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-17,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-17(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-17(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-18,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-18(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-18(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-19,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-19(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-19(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-20,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-20(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-20(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-21,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-21(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-21(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-22,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-22(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-22(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-23,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-23(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-23(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-24,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-24(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-24(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-25,Incident Response,Pass,Supported by Google SOC and specialized AI safety teams.
+IR-25(1),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+IR-25(2),Incident Response Enhancement,Pass,Enhancement requirement: Supported by Google SOC and specialized AI safety teams.
+MA-1,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-1(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-1(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-2,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-2(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-2(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-3,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-3(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-3(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-4,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-4(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-4(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-5,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-5(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-5(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-6,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-6(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-6(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-7,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-7(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-7(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-8,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-8(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-8(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-9,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-9(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-9(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-10,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-10(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-10(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-11,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-11(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-11(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-12,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-12(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-12(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-13,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-13(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-13(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-14,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-14(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-14(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-15,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-15(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-15(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-16,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-16(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-16(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-17,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-17(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-17(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-18,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-18(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-18(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-19,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-19(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-19(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-20,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-20(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-20(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-21,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-21(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-21(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-22,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-22(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-22(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-23,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-23(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-23(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-24,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-24(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-24(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-25,Maintenance,Pass,Inherited: Google handles hardware/firmware maintenance.
+MA-25(1),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MA-25(2),Maintenance Enhancement,Pass,Enhancement requirement: Inherited: Google handles hardware/firmware maintenance.
+MP-1,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-1(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-1(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-2,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-2(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-2(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-3,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-3(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-3(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-4,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-4(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-4(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-5,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-5(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-5(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-6,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-6(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-6(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-7,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-7(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-7(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-8,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-8(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-8(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-9,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-9(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-9(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-10,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-10(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-10(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-11,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-11(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-11(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-12,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-12(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-12(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-13,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-13(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-13(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-14,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-14(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-14(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-15,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-15(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-15(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-16,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-16(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-16(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-17,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-17(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-17(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-18,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-18(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-18(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-19,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-19(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-19(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-20,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-20(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-20(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-21,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-21(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-21(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-22,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-22(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-22(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-23,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-23(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-23(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-24,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-24(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-24(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-25,Media Protection,Pass,Inherited: Cryptographic erasure and physical shredding.
+MP-25(1),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+MP-25(2),Media Protection Enhancement,Pass,Enhancement requirement: Inherited: Cryptographic erasure and physical shredding.
+PE-1,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-1(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-1(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-2,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-2(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-2(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-3,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-3(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-3(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-4,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-4(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-4(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-5,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-5(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-5(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-6,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-6(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-6(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-7,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-7(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-7(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-8,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-8(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-8(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-9,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-9(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-9(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-10,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-10(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-10(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-11,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-11(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-11(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-12,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-12(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-12(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-13,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-13(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-13(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-14,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-14(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-14(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-15,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-15(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-15(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-16,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-16(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-16(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-17,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-17(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-17(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-18,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-18(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-18(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-19,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-19(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-19(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-20,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-20(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-20(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-21,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-21(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-21(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-22,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-22(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-22(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-23,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-23(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-23(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-24,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-24(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-24(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-25,Physical and Environmental Protection,Pass,Inherited: World-class data center physical security.
+PE-25(1),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PE-25(2),Physical and Environmental Protection Enhancement,Pass,Enhancement requirement: Inherited: World-class data center physical security.
+PL-1,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-1(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-1(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-2,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-2(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-2(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-3,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-3(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-3(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-4,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-4(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-4(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-5,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-5(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-5(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-6,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-6(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-6(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-7,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-7(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-7(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-8,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-8(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-8(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-9,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-9(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-9(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-10,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-10(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-10(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-11,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-11(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-11(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-12,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-12(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-12(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-13,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-13(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-13(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-14,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-14(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-14(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-15,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-15(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-15(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-16,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-16(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-16(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-17,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-17(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-17(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-18,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-18(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-18(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-19,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-19(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-19(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-20,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-20(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-20(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-21,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-21(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-21(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-22,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-22(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-22(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-23,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-23(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-23(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-24,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-24(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-24(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-25,Planning,Pass,Comprehensive SSP and Rules of Behavior documented.
+PL-25(1),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PL-25(2),Planning Enhancement,Pass,Enhancement requirement: Comprehensive SSP and Rules of Behavior documented.
+PM-1,Program Management,Pass,Enterprise-level AI risk management program.
+PM-1(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-1(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-2,Program Management,Pass,Enterprise-level AI risk management program.
+PM-2(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-2(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-3,Program Management,Pass,Enterprise-level AI risk management program.
+PM-3(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-3(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-4,Program Management,Pass,Enterprise-level AI risk management program.
+PM-4(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-4(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-5,Program Management,Pass,Enterprise-level AI risk management program.
+PM-5(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-5(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-6,Program Management,Pass,Enterprise-level AI risk management program.
+PM-6(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-6(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-7,Program Management,Pass,Enterprise-level AI risk management program.
+PM-7(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-7(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-8,Program Management,Pass,Enterprise-level AI risk management program.
+PM-8(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-8(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-9,Program Management,Pass,Enterprise-level AI risk management program.
+PM-9(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-9(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-10,Program Management,Pass,Enterprise-level AI risk management program.
+PM-10(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-10(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-11,Program Management,Pass,Enterprise-level AI risk management program.
+PM-11(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-11(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-12,Program Management,Pass,Enterprise-level AI risk management program.
+PM-12(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-12(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-13,Program Management,Pass,Enterprise-level AI risk management program.
+PM-13(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-13(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-14,Program Management,Pass,Enterprise-level AI risk management program.
+PM-14(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-14(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-15,Program Management,Pass,Enterprise-level AI risk management program.
+PM-15(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-15(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-16,Program Management,Pass,Enterprise-level AI risk management program.
+PM-16(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-16(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-17,Program Management,Pass,Enterprise-level AI risk management program.
+PM-17(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-17(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-18,Program Management,Pass,Enterprise-level AI risk management program.
+PM-18(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-18(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-19,Program Management,Pass,Enterprise-level AI risk management program.
+PM-19(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-19(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-20,Program Management,Pass,Enterprise-level AI risk management program.
+PM-20(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-20(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-21,Program Management,Pass,Enterprise-level AI risk management program.
+PM-21(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-21(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-22,Program Management,Pass,Enterprise-level AI risk management program.
+PM-22(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-22(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-23,Program Management,Pass,Enterprise-level AI risk management program.
+PM-23(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-23(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-24,Program Management,Pass,Enterprise-level AI risk management program.
+PM-24(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-24(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-25,Program Management,Pass,Enterprise-level AI risk management program.
+PM-25(1),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PM-25(2),Program Management Enhancement,Pass,Enhancement requirement: Enterprise-level AI risk management program.
+PS-1,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-1(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-1(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-2,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-2(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-2(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-3,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-3(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-3(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-4,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-4(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-4(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-5,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-5(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-5(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-6,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-6(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-6(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-7,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-7(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-7(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-8,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-8(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-8(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-9,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-9(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-9(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-10,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-10(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-10(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-11,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-11(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-11(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-12,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-12(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-12(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-13,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-13(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-13(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-14,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-14(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-14(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-15,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-15(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-15(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-16,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-16(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-16(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-17,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-17(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-17(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-18,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-18(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-18(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-19,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-19(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-19(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-20,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-20(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-20(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-21,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-21(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-21(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-22,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-22(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-22(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-23,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-23(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-23(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-24,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-24(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-24(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-25,Personnel Security,Pass,Rigorous background checks for all privileged users.
+PS-25(1),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PS-25(2),Personnel Security Enhancement,Pass,Enhancement requirement: Rigorous background checks for all privileged users.
+PT-1,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-1(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-1(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-2,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-2(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-2(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-3,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-3(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-3(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-4,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-4(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-4(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-5,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-5(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-5(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-6,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-6(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-6(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-7,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-7(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-7(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-8,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-8(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-8(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-9,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-9(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-9(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-10,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-10(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-10(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-11,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-11(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-11(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-12,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-12(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-12(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-13,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-13(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-13(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-14,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-14(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-14(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-15,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-15(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-15(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-16,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-16(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-16(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-17,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-17(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-17(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-18,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-18(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-18(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-19,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-19(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-19(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-20,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-20(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-20(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-21,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-21(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-21(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-22,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-22(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-22(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-23,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-23(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-23(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-24,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-24(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-24(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-25,PII Processing and Transparency,Partial,Risk: Training data scrubbing and model 'memory' leakage.
+PT-25(1),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+PT-25(2),PII Processing and Transparency Enhancement,Partial,Enhancement requirement: Risk: Training data scrubbing and model 'memory' leakage.
+RA-1,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-1(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-1(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-2,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-2(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-2(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-3,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-3(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-3(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-4,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-4(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-4(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-5,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-5(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-5(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-6,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-6(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-6(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-7,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-7(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-7(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-8,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-8(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-8(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-9,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-9(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-9(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-10,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-10(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-10(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-11,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-11(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-11(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-12,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-12(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-12(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-13,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-13(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-13(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-14,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-14(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-14(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-15,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-15(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-15(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-16,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-16(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-16(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-17,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-17(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-17(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-18,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-18(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-18(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-19,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-19(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-19(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-20,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-20(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-20(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-21,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-21(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-21(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-22,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-22(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-22(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-23,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-23(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-23(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-24,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-24(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-24(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-25,Risk Assessment,Pass,Continuous red-teaming and adversarial testing.
+RA-25(1),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+RA-25(2),Risk Assessment Enhancement,Pass,Enhancement requirement: Continuous red-teaming and adversarial testing.
+SA-1,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-1(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-1(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-2,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-2(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-2(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-3,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-3(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-3(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-4,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-4(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-4(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-5,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-5(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-5(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-6,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-6(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-6(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-7,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-7(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-7(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-8,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-8(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-8(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-9,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-9(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-9(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-10,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-10(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-10(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-11,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-11(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-11(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-12,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-12(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-12(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-13,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-13(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-13(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-14,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-14(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-14(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-15,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-15(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-15(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-16,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-16(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-16(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-17,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-17(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-17(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-18,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-18(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-18(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-19,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-19(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-19(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-20,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-20(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-20(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-21,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-21(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-21(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-22,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-22(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-22(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-23,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-23(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-23(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-24,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-24(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-24(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-25,System and Services Acquisition,Pass,Supply chain security reviews for hardware/software.
+SA-25(1),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SA-25(2),System and Services Acquisition Enhancement,Pass,Enhancement requirement: Supply chain security reviews for hardware/software.
+SC-1,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-1(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-1(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-2,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-2(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-2(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-3,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-3(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-3(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-4,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-4(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-4(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-5,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-5(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-5(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-6,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-6(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-6(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-7,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-7(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-7(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-8,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-8(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-8(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-9,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-9(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-9(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-10,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-10(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-10(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-11,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-11(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-11(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-12,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-12(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-12(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-13,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-13(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-13(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-14,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-14(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-14(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-15,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-15(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-15(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-16,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-16(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-16(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-17,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-17(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-17(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-18,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-18(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-18(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-19,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-19(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-19(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-20,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-20(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-20(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-21,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-21(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-21(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-22,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-22(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-22(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-23,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-23(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-23(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-24,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-24(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-24(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-25,System and Communications Protection,Pass,"TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-25(1),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SC-25(2),System and Communications Protection Enhancement,Pass,"Enhancement requirement: TLS 1.3, VPC Service Controls, and encryption at rest."
+SI-1,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-1(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-1(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-2,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-2(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-2(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-3,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-3(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-3(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-4,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-4(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-4(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-5,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-5(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-5(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-6,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-6(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-6(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-7,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-7(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-7(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-8,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-8(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-8(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-9,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-9(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-9(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-10,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-10(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-10(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-11,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-11(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-11(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-12,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-12(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-12(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-13,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-13(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-13(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-14,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-14(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-14(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-15,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-15(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-15(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-16,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-16(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-16(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-17,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-17(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-17(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-18,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-18(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-18(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-19,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-19(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-19(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-20,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-20(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-20(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-21,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-21(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-21(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-22,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-22(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-22(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-23,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-23(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-23(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-24,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-24(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-24(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-25,System and Information Integrity,Partial,Risk: Input validation against prompt injection is non-deterministic.
+SI-25(1),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SI-25(2),System and Information Integrity Enhancement,Partial,Enhancement requirement: Risk: Input validation against prompt injection is non-deterministic.
+SR-1,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-1(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-1(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-2,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-2(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-2(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-3,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-3(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-3(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-4,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-4(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-4(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-5,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-5(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-5(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-6,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-6(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-6(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-7,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-7(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-7(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-8,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-8(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-8(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-9,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-9(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-9(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-10,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-10(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-10(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-11,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-11(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-11(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-12,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-12(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-12(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-13,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-13(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-13(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-14,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-14(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-14(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-15,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-15(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-15(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-16,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-16(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-16(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-17,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-17(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-17(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-18,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-18(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-18(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-19,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-19(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-19(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-20,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-20(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-20(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-21,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-21(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-21(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-22,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-22(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-22(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-23,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-23(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-23(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-24,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-24(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-24(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-25,Supply Chain Risk Management,Partial,Complexity in GPU supply and model training data origins.
+SR-25(1),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
+SR-25(2),Supply Chain Risk Management Enhancement,Partial,Enhancement requirement: Complexity in GPU supply and model training data origins.
