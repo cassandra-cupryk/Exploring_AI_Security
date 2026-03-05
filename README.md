@@ -9,3 +9,11 @@ This repository strictly contains results and outputs from AI. I prompted AI mod
 #### Snake Game
 #### Memory Mapping Game
 #### Understanding Claude
+
+## Claude
+
+### Google
+
+#### Gemini 3
+
+
