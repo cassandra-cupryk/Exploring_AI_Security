@@ -10,10 +10,8 @@ This repository strictly contains results and outputs from AI. I prompted AI mod
 #### Memory Mapping Game
 #### Understanding Claude
 
-## Claude
+## Google
 
-### Google
-
-#### Gemini 3
+### Gemini 3
 
 
