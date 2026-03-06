@@ -10,11 +10,17 @@ My goal is to better undertand how AI models work, especially in regards to Cybe
 
 ### Sonnet 4.6
 
+#### Asking Claude AI to Design an Audit and Audit Itself
+* Full AI Chat for Context: https://claude.ai/share/39d26d08-b9cd-404e-9c7f-329a4367c667
+
 #### [Snake Game](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/Claude/Sonnet_4.6/Snake_Game_Results)
+* Full AI Chat for Context: https://claude.ai/share/39d26d08-b9cd-404e-9c7f-329a4367c667
 
 #### [Memory Mapping Game](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/Claude/Sonnet_4.6/Memory_Game_Results)
+* Full AI Chat for Context: https://claude.ai/share/39d26d08-b9cd-404e-9c7f-329a4367c667
 
 #### [Understanding Claude](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/Claude/Sonnet_4.6/Understanding_Claude)
+* Full AI Chat for Context: https://claude.ai/share/39d26d08-b9cd-404e-9c7f-329a4367c667
 
 ## Google
 
