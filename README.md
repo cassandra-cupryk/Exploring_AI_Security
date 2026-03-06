@@ -2,9 +2,9 @@
 
 Welcome! 
 
-In this repository, I am providing any outputs that AI models produced and the links to the chats that generated the outputs in order to provide transparency for how the results were obtained.
+In this repository, I am providing any outputs that AI models produced and the links to the chats that generated the outputs in order to provide transparency for how the outputs were obtained.
 
-My goal is to better undertand how AI models work by prompting AI models to complete questions and tasks, especially in regards to Cybersecurity. 
+My goal is to better undertand how AI models work, especially in regards to Cybersecurity, by prompting AI models to complete questions and tasks. 
 
 ## Claude
 
