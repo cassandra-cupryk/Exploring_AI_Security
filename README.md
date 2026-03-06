@@ -24,5 +24,5 @@ This repository strictly contains results and outputs from AI. I prompted AI mod
 
 ### ChatGPT 5.3
 
-#### [ChatGPT auditing itself according to NIST SP 800-53 Revision 5]()
+#### [ChatGPT auditing itself according to NIST SP 800-53 Revision 5](https://github.com/cassandra-cupryk/Exploring_AI_Security/tree/main/OpenAI/ChatGPT_5.3)
 * Full AI Chat for Context: https://chatgpt.com/share/69aa17f5-fd48-8010-9e87-3937d0c52b30
