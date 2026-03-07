@@ -6,6 +6,8 @@ In this repository, I am providing any outputs that AI models produced and the l
 
 My goal is to better undertand how AI models work, especially in regards to Cybersecurity, by prompting AI models to complete specific questions and tasks. 
 
+Thanks for visiting!
+
 ## Claude
 
 ### Sonnet 4.6
